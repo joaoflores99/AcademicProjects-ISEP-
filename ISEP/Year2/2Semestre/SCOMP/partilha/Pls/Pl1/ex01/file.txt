@@ -1,0 +1,31 @@
+int main(void) {
+int x = 1;
+pid_t p = fork(); /*pid_t: sys/types.h; fork(): unistd.h*/ 
+if (p == 0) {
+x = x+1;
+printf("1. x = %d\n", x);
+} else {
+ x=x-1
+ printf("2. x=%d\n",X);
+ }
+ printf("3. %d; x = %d\n", p, x); 
+ }
+ 
+ 
+  alinea a)
+  
+  corre o filho 
+  2.x=2
+  3. x=2
+	p=0
+  
+  corre o pai 
+  1. x=0
+  3. x=0
+	  p=valor >0
+  
+  alinea b)
+  nao sabemos a ordem de execucao dos procesos pai e do processo filho, uma maneira possoivel 
+  de sabermos era depois do fork evocar a funcao wait caso o pid fosse o do pai pid>0, assim o filho executava  
+  primeiro e so depois executava o pai
+  

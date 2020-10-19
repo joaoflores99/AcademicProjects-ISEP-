@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+    <xs:complexType name="TipoArtista">
+		<xs:attribute name="nome" use="required" type="xs:string"/>
+		<xs:attribute name="url" use="optional" type="xs:anyURI"/>
+		<xs:attribute name="horario" use="required" type="xs:string"/>
+	</xs:complexType>
+
+    <xs:simpleType name="TipoDiaSemana">
+        <xs:restriction base="xs:ID">
+            <xs:enumeration value="domingo"/>
+            <xs:enumeration value="segunda"/>
+            <xs:enumeration value="terca"/>
+            <xs:enumeration value="quarta"/>
+            <xs:enumeration value="quinta"/>
+            <xs:enumeration value="sexta"/>
+            <xs:enumeration value="sabado"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:complexType name="TipoNoite">
+      	<xs:sequence>
+			<xs:element name="artista" type="TipoArtista" minOccurs="2" maxOccurs="2"/>
+		</xs:sequence>
+		<xs:attribute name="de" use="required" type="TipoDiaSemana"/>
+	</xs:complexType> 
+
+    <xs:simpleType name="TipoAno">
+        <xs:restriction base="xs:int">
+            <xs:pattern value="20[012][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+	
+	<xs:complexType name="TipoCartaz">
+		<xs:sequence>
+			<xs:element name="noite" type="TipoNoite" minOccurs="7" maxOccurs="7"/>
+		</xs:sequence>
+		<xs:attribute name="ano" use="required" type="TipoAno"/>
+	</xs:complexType>
+	
+	<xs:element name="cartaz" type="TipoCartaz"/>
+
+</xs:schema>

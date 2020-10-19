@@ -1,0 +1,19 @@
+1 int main(void) {  
+2   int a=0, b, c, d; 
+3   b = (int) fork(); 
+4   c = (int) getpid(); /* getpid(), getppid(): unistd.h*/ 
+5   d = (int) getppid(); 
+6   a = a + 5; 
+7   printf("\na=%d, b=%d, c=%d, d=%d\n",a,b,c,d);
+8 }
+
+//alinea a
+	
+	o valor de a é sempre 5 em ambos os processos.
+	o valor de b é o fork 0
+	o c é o valor do pid que é sempre diferente
+	o d é o pai do atual tambem é diferente
+	
+	so o a é que é igual
+	
+	

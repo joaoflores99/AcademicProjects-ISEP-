@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Once again a list of cars --> 
+<cars>
+  <car model="Focus" manufacturer="Ford" year="2000" />
+  <car model="Golf" manufacturer="Volkswagen" year="1999" />
+  <car model="Corolla" manufacturer="Toyota" year="1999" />
+  <car model="Civic" manufacturer="Honda" year="2000" />
+  <car model="Astra" manufacturer="Opel" year="2000" />
+</cars>

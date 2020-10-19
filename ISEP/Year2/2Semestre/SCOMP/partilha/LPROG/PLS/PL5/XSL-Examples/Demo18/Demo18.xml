@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cars>
+  <models>
+    <model name="Golf" manufacturer="VW" year="1999" />
+    <model name="Corolla" manufacturer="TY" year="1999" />
+    <model name="Focus" manufacturer="FO" year="2000" />
+    <model name="Civic" manufacturer="HO" year="2000" />
+    <model name="Astra" manufacturer="OP" year="2000" />
+    <model name="Celica" manufacturer="TY" year="2000" />
+    <model name="Mondeo" manufacturer="FO" year="2001" />
+    <model name="Passat" manufacturer="VW" year="2001" />
+    <model name="Accord" manufacturer="HO" year="2002" />
+    <model name="Corsa" manufacturer="OP" year="2002" />
+  </models>
+  <manufacturers>
+    <manufacturer id="VW" name="Volkswagen" country="Germany" />
+    <manufacturer id="OP" name="Opel" country="Germany" />
+    <manufacturer id="TY" name="Toyota" country="Japan" />
+    <manufacturer id="FO" name="Ford" country="UK" />
+    <manufacturer id="HO" name="Honda" country="Japan" />
+  </manufacturers>
+</cars>

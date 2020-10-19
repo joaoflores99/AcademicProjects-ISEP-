@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="InsureAgility.xsl"?>
+<casos
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="../xsd/InsureAgility.xsd">
+
+        <cliente reference="12781">
+            <cc>
+                <numero>11111111</numero>
+                <dataFim>2020-05-16</dataFim>
+            </cc>
+            <nome>
+                <primeiro> Pedro </primeiro>
+                <apelido> Caxinas </apelido>
+            </nome>
+            <contactos>
+                <telefone> 919191911 </telefone>
+            </contactos>
+            <morada>
+                <rua> Rua 25 Abril </rua>
+                <porta> 326 </porta>
+                <localidade> Caxinas </localidade>
+                <pais>Portugal</pais>
+                <codigo_postal> 4420 </codigo_postal>
+            </morada>
+            <objetos>
+                <objeto>
+                    <nomeObjeto> Casa </nomeObjeto>
+                    <moradaObjeto>
+                        <rua> Rua 25 Abril </rua>
+                        <porta> 326 </porta>
+                        <localidade> Caxinas </localidade>
+                        <pais>Portugal</pais>
+                        <codigo_postal> 4420 </codigo_postal>
+                    </moradaObjeto>
+                    <coberturas>
+                        <cobertura cobertura="Incendios" >
+                            <descricao> Mais provavel perto de florestas </descricao>
+                        </cobertura>
+                        <cobertura cobertura="Roubos">
+                            <descricao> Mais provavel perto de ramalde </descricao>
+                        </cobertura>
+                        <cobertura cobertura="Inundacoes">
+                            <descricao> Mais provavel perto de espinho </descricao>
+                        </cobertura>
+                    </coberturas>
+                    <valorPremio>500</valorPremio>
+                    <vigencia>
+                        <dataInicio>
+                            <ano>2019</ano>
+                            <mes>05</mes>
+                            <dia>16</dia>
+                        </dataInicio>
+                        <dataFim>
+                            <ano>2020</ano>
+                            <mes>05</mes>
+                            <dia>16</dia>
+                        </dataFim>
+                    </vigencia>
+                    <ocurrencias>
+                        <ocurrenciasTotal> 10 </ocurrenciasTotal>
+                        <ocurrenciasPenultimoAno> 2 </ocurrenciasPenultimoAno>
+                        <ocurrenciasUltimoAno> 1 </ocurrenciasUltimoAno>
+                    </ocurrencias>
+                </objeto>
+            </objetos>
+        </cliente>
+    </casos>

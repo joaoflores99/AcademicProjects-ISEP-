@@ -1,0 +1,3 @@
+ a string "SCOMP" e impressa duas vezes, uma vez que devido ao fork, e criado um processo
+ filho onde tera,tal como no pai, uma funcao execlp, logo o o filho e o pai executam a mesma 
+ funcao e assim sao imprressas duas vezes!

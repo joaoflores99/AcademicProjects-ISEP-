@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        Nome:
+         Pedro  Caxinas 
+
+        
+        Objetos:
+        
+        Nome do objeto:
+                 Casa 
+        Morada do objeto:
+                
+            Rua:
+             Rua 25 Abril 
+            Porta:
+             326   
+            Localidade:
+             Caxinas   
+            Pais:
+            Portugal  
+            Codigo Postal:
+             4420   
+        Coberturas:
+                
+        Cobertura:
+            Incendios
+        Cobertura:
+            Roubos
+        Cobertura:
+            Inundacoes  
+        Valor prémio:
+                500  
+        Vigência:
+                
+            Data inicio:
+            2019/05/16
+            Data fim:
+            2020/05/16  
+        Ocorrências:
+                
+            Ocurencias Total
+             10 
+            Ocurencias Penultimo Ano
+             2 
+            Ocurencias Ultimo Ano
+             1 

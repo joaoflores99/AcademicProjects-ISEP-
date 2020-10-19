@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Estacao.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projeto2_esinf</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.projeto2_esinf</a> &gt; <span class="el_source">Estacao.java</span></div><h1>Estacao.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.projeto2_esinf;
+
+/**
+ *
+ * @author morei
+ */
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ *
+ * @author jose
+ */
+public class Estacao {
+
+    private String nome;
+    private double latitude;
+    private double longitude;
+    private List&lt;String&gt; linhas;
+
+    /**
+     * construtor vazio
+     */
+<span class="fc" id="L30">    public Estacao() {</span>
+<span class="fc" id="L31">    }</span>
+
+    /**
+     * construtor da estacao
+     *
+     * @param nome nome da estacao
+     * @param latitude latitude da estacao
+     * @param longitude longitude da estacao
+     */
+<span class="fc" id="L40">    public Estacao(String nome, double latitude, double longitude) {</span>
+<span class="fc" id="L41">        setNome(nome);</span>
+<span class="fc" id="L42">        setLatitude(latitude);</span>
+<span class="fc" id="L43">        setLongitude(longitude);</span>
+<span class="fc" id="L44">        linhas = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L45">    }</span>
+
+    /**
+     * obter todas as linhas numa certa estacao
+     *
+     * @return
+     */
+    public List&lt;String&gt; getTodasLinhas() {
+<span class="fc" id="L53">        return linhas;</span>
+    }
+
+    /**
+     * obter o nome
+     *
+     * @return
+     */
+
+    public String getNome() {
+<span class="fc" id="L63">        return nome;</span>
+    }
+
+    /**
+     * obter a latitude
+     *
+     * @return
+     */
+
+    public double getLatitude() {
+<span class="fc" id="L73">        return latitude;</span>
+    }
+
+    /**
+     * obter a longitude
+     *
+     * @return
+     */
+    public double getLongitude() {
+<span class="fc" id="L82">        return longitude;</span>
+    }
+
+    /**
+     * alterar o nome
+     *
+     * @param nome
+     */
+    public void setNome(String nome) {
+<span class="fc" id="L91">        this.nome = nome;</span>
+<span class="fc" id="L92">    }</span>
+
+    public void setLatitude(double latitude) {
+<span class="pc bpc" id="L95" title="1 of 4 branches missed.">        if (latitude &gt; 90 || latitude &lt; -90) {</span>
+<span class="fc" id="L96">            throw new IllegalArgumentException(&quot;Valor de latidude inesperado&quot;);</span>
+        }
+<span class="fc" id="L98">        this.latitude = latitude;</span>
+<span class="fc" id="L99">    }</span>
+
+    public void setLinhas(List&lt;String&gt; linhas) {
+<span class="fc" id="L102">        this.linhas = linhas;</span>
+<span class="fc" id="L103">    }</span>
+
+    public void setLongitude(double longitude) {
+<span class="pc bpc" id="L106" title="1 of 4 branches missed.">        if (longitude &gt; 180 || longitude &lt; -180) {</span>
+<span class="fc" id="L107">            throw new IllegalArgumentException(&quot;Valor de longitude inesperado&quot;);</span>
+        }
+<span class="fc" id="L109">        this.longitude = longitude;</span>
+<span class="fc" id="L110">    }</span>
+
+    public boolean addLinha(String linha) {
+<span class="pc bpc" id="L113" title="1 of 2 branches missed.">        if (!linhas.contains(linha)) {</span>
+<span class="fc" id="L114">            linhas.add(linha);</span>
+<span class="fc" id="L115">            return true;</span>
+        }
+<span class="nc" id="L117">        return false;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L122" title="All 2 branches covered.">        if (this == obj) {</span>
+<span class="fc" id="L123">            return true;</span>
+        }
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">        if (obj == null) {</span>
+<span class="nc" id="L126">            return false;</span>
+        }
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        if (getClass() != obj.getClass()) {</span>
+<span class="nc" id="L129">            return false;</span>
+        }
+<span class="fc" id="L131">        final Estacao other = (Estacao) obj;</span>
+<span class="fc" id="L132">        return this.nome.equals(other.nome);</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L137">        int hash = 3;</span>
+<span class="fc" id="L138">        hash = 67 * hash + Objects.hashCode(this.nome);</span>
+<span class="fc" id="L139">        hash = 67 * hash + (int) (Double.doubleToLongBits(this.latitude) ^ (Double.doubleToLongBits(this.latitude) &gt;&gt;&gt; 32));</span>
+<span class="fc" id="L140">        hash = 67 * hash + (int) (Double.doubleToLongBits(this.longitude) ^ (Double.doubleToLongBits(this.longitude) &gt;&gt;&gt; 32));</span>
+<span class="fc" id="L141">        return hash;</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L146">        return &quot;Estacao nome=&quot; + nome + &quot; latitude=&quot; + latitude + &quot; longitude=&quot; + longitude;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,0 +1,4 @@
+alinea a) 
+ sao criados 2^N-1 processos filho, ou seja 2^4 -1= 15 processos filho.
+ 
+ 

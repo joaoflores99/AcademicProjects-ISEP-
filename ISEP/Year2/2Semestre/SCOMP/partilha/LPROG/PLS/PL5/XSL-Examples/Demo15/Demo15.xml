@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Example for whitespace processing --> 
+<news>
+	<header>    Man bytes Dog</header>
+	<date>13/05/2016</date>
+  <text>
+	  In So Mewhereland a 30 year old man has bitten   a  2   year  old    dog.  
+	  Our exclusive   sources say that the dog has barked and the man   
+      is dead, chocked    with dog hair.	 
+  </text>
+</news>

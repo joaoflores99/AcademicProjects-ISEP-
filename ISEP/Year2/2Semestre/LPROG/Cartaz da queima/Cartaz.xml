@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/xsl" href="t4.xslt"?>
+
+<cartaz ano="2019" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="Cartaz.xsd">
+	<noite de="sabado">
+		<artista nome="100AURA" horario="00:01"/>
+		<artista nome="RUI VELOSO" url="https://ruiveloso.com.pt/" horario="02:00"/>
+	</noite>
+	<noite de="domingo">
+		<artista nome="DEEJAY TELIO" horario="23:00"/>
+		<artista nome="DAVID CARREIRA" horario="01:00"/>
+	</noite>
+	<noite de="segunda">
+		<artista nome="MUNDO SEGUNDO E SAM THE KID" horario="23:00"/>
+		<artista nome="RICHIE CAMPBELL" horario="01:00"/>
+	</noite>
+	<noite de="terca">
+		<artista nome="INSERT COIN" horario="23:00"/>
+		<artista nome="QUIM BARREIROS" horario="01:00"/>
+	</noite>
+	<noite de="quarta">
+		<artista nome="DAVID FONSECA" horario="23:00"/>
+		<artista nome="WET BED GANG" horario="01:00"/>
+	</noite>
+	<noite de="quinta">
+		<artista nome="MASTIKSOUL" horario="23:00"/>
+		<artista nome="LOST FREQUENCIES" url="https://lostfrequencies.com/" horario="01:00"/>
+	</noite>
+	<noite de="sexta">
+		<artista nome="JIMMY P" url="https://twitter.com/OfficialJimmyP" horario="23:00"/>
+		<artista nome="GABRIEL O PENSADOR" url="https://gabrielopensador.com.br/" horario="01:00"/>
+	</noite>
+</cartaz>

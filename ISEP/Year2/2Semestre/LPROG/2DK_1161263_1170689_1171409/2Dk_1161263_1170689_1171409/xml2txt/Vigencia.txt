@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+                Informacao sobre clientes e seus produtos cujo data de fim da vigencia seja 05/2020
+                        
+                Nome do Cliente:  Pedro  Caxinas 
+                Objetos:
+            
+                Nome do Objeto:  Casa 
+                Coberturas:
+                
+               Nome Cobertura: Incendios
+               Descricao:  Mais provavel perto de florestas 
+               Nome Cobertura: Roubos
+               Descricao:  Mais provavel perto de ramalde 
+               Nome Cobertura: Inundacoes
+               Descricao:  Mais provavel perto de espinho   
+                Vigencia: 
+               Data inicio: 2019/05/16
+               Data fim: 2020/05/16

@@ -1,0 +1,329 @@
+Grammar
+
+    0 $accept: FICHEIRO $end
+
+    1 FICHEIRO: %empty
+    2         | LINHA FICHEIRO
+
+    3 LINHA: S MUDA_LINHA
+
+    4 S: CODIGO ESPACO NOME T DATA ESPACO Q K
+
+    5 T: ESPACO
+    6  | ESPACO PESO ESPACO
+
+    7 Q: SV
+    8  | VQ
+
+    9 K: %empty
+   10  | VIRGULA ESPACO Q K
+
+   11 SV: SERVICO ESPACO VALOR
+
+   12 VQ: VACINA ESPACO QUANTIDADE
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256)
+CODIGO (258) 4
+NOME (259) 4
+PESO (260) 6
+DATA (261) 4
+SERVICO (262) 11
+VALOR (263) 11
+VACINA (264) 12
+QUANTIDADE (265) 12
+ESPACO (266) 4 5 6 10 11 12
+VIRGULA (267) 10
+MUDA_LINHA (268) 3
+
+
+Nonterminals, with rules where they appear
+
+$accept (14)
+    on left: 0
+FICHEIRO (15)
+    on left: 1 2, on right: 0 2
+LINHA (16)
+    on left: 3, on right: 2
+S (17)
+    on left: 4, on right: 3
+T (18)
+    on left: 5 6, on right: 4
+Q (19)
+    on left: 7 8, on right: 4 10
+K (20)
+    on left: 9 10, on right: 4 10
+SV (21)
+    on left: 11, on right: 7
+VQ (22)
+    on left: 12, on right: 8
+
+
+State 0
+
+    0 $accept: . FICHEIRO $end
+    1 FICHEIRO: . %empty  [$end]
+    2         | . LINHA FICHEIRO
+    3 LINHA: . S MUDA_LINHA
+    4 S: . CODIGO ESPACO NOME T DATA ESPACO Q K
+
+    CODIGO  shift, and go to state 1
+
+    $default  reduce using rule 1 (FICHEIRO)
+
+    FICHEIRO  go to state 2
+    LINHA     go to state 3
+    S         go to state 4
+
+
+State 1
+
+    4 S: CODIGO . ESPACO NOME T DATA ESPACO Q K
+
+    ESPACO  shift, and go to state 5
+
+
+State 2
+
+    0 $accept: FICHEIRO . $end
+
+    $end  shift, and go to state 6
+
+
+State 3
+
+    1 FICHEIRO: . %empty  [$end]
+    2         | . LINHA FICHEIRO
+    2         | LINHA . FICHEIRO
+    3 LINHA: . S MUDA_LINHA
+    4 S: . CODIGO ESPACO NOME T DATA ESPACO Q K
+
+    CODIGO  shift, and go to state 1
+
+    $default  reduce using rule 1 (FICHEIRO)
+
+    FICHEIRO  go to state 7
+    LINHA     go to state 3
+    S         go to state 4
+
+
+State 4
+
+    3 LINHA: S . MUDA_LINHA
+
+    MUDA_LINHA  shift, and go to state 8
+
+
+State 5
+
+    4 S: CODIGO ESPACO . NOME T DATA ESPACO Q K
+
+    NOME  shift, and go to state 9
+
+
+State 6
+
+    0 $accept: FICHEIRO $end .
+
+    $default  accept
+
+
+State 7
+
+    2 FICHEIRO: LINHA FICHEIRO .
+
+    $default  reduce using rule 2 (FICHEIRO)
+
+
+State 8
+
+    3 LINHA: S MUDA_LINHA .
+
+    $default  reduce using rule 3 (LINHA)
+
+
+State 9
+
+    4 S: CODIGO ESPACO NOME . T DATA ESPACO Q K
+    5 T: . ESPACO
+    6  | . ESPACO PESO ESPACO
+
+    ESPACO  shift, and go to state 10
+
+    T  go to state 11
+
+
+State 10
+
+    5 T: ESPACO .  [DATA]
+    6  | ESPACO . PESO ESPACO
+
+    PESO  shift, and go to state 12
+
+    $default  reduce using rule 5 (T)
+
+
+State 11
+
+    4 S: CODIGO ESPACO NOME T . DATA ESPACO Q K
+
+    DATA  shift, and go to state 13
+
+
+State 12
+
+    6 T: ESPACO PESO . ESPACO
+
+    ESPACO  shift, and go to state 14
+
+
+State 13
+
+    4 S: CODIGO ESPACO NOME T DATA . ESPACO Q K
+
+    ESPACO  shift, and go to state 15
+
+
+State 14
+
+    6 T: ESPACO PESO ESPACO .
+
+    $default  reduce using rule 6 (T)
+
+
+State 15
+
+    4 S: CODIGO ESPACO NOME T DATA ESPACO . Q K
+    7 Q: . SV
+    8  | . VQ
+   11 SV: . SERVICO ESPACO VALOR
+   12 VQ: . VACINA ESPACO QUANTIDADE
+
+    SERVICO  shift, and go to state 16
+    VACINA   shift, and go to state 17
+
+    Q   go to state 18
+    SV  go to state 19
+    VQ  go to state 20
+
+
+State 16
+
+   11 SV: SERVICO . ESPACO VALOR
+
+    ESPACO  shift, and go to state 21
+
+
+State 17
+
+   12 VQ: VACINA . ESPACO QUANTIDADE
+
+    ESPACO  shift, and go to state 22
+
+
+State 18
+
+    4 S: CODIGO ESPACO NOME T DATA ESPACO Q . K
+    9 K: . %empty  [MUDA_LINHA]
+   10  | . VIRGULA ESPACO Q K
+
+    VIRGULA  shift, and go to state 23
+
+    $default  reduce using rule 9 (K)
+
+    K  go to state 24
+
+
+State 19
+
+    7 Q: SV .
+
+    $default  reduce using rule 7 (Q)
+
+
+State 20
+
+    8 Q: VQ .
+
+    $default  reduce using rule 8 (Q)
+
+
+State 21
+
+   11 SV: SERVICO ESPACO . VALOR
+
+    VALOR  shift, and go to state 25
+
+
+State 22
+
+   12 VQ: VACINA ESPACO . QUANTIDADE
+
+    QUANTIDADE  shift, and go to state 26
+
+
+State 23
+
+   10 K: VIRGULA . ESPACO Q K
+
+    ESPACO  shift, and go to state 27
+
+
+State 24
+
+    4 S: CODIGO ESPACO NOME T DATA ESPACO Q K .
+
+    $default  reduce using rule 4 (S)
+
+
+State 25
+
+   11 SV: SERVICO ESPACO VALOR .
+
+    $default  reduce using rule 11 (SV)
+
+
+State 26
+
+   12 VQ: VACINA ESPACO QUANTIDADE .
+
+    $default  reduce using rule 12 (VQ)
+
+
+State 27
+
+    7 Q: . SV
+    8  | . VQ
+   10 K: VIRGULA ESPACO . Q K
+   11 SV: . SERVICO ESPACO VALOR
+   12 VQ: . VACINA ESPACO QUANTIDADE
+
+    SERVICO  shift, and go to state 16
+    VACINA   shift, and go to state 17
+
+    Q   go to state 28
+    SV  go to state 19
+    VQ  go to state 20
+
+
+State 28
+
+    9 K: . %empty  [MUDA_LINHA]
+   10  | . VIRGULA ESPACO Q K
+   10  | VIRGULA ESPACO Q . K
+
+    VIRGULA  shift, and go to state 23
+
+    $default  reduce using rule 9 (K)
+
+    K  go to state 29
+
+
+State 29
+
+   10 K: VIRGULA ESPACO Q K .
+
+    $default  reduce using rule 10 (K)

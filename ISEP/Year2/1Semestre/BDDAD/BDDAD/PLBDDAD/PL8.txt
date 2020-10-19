@@ -1,0 +1,25 @@
+(1)
+COP -> IDC
+IDC -> NCP
+IDC -> TCP
+IDE -> SHE
+
+G(COP, IDC, NCP, TCP, IDE, HTE, SHE)
+
+Chaves candidatas: (COP, IDE)
+Chave primária: (COP, IDE)
+
+G(*COP*IDE, IDC, NCP, TCP, HTE, SHE)
+
+c) G(*COP*IDE, IDC, NCP, TCP, HTE, SHE)
+	=== 1FN ===
+        === 2FN ===
+  	EMPREGADO(*IDE, SHE) - Já em 3FN
+	CHEFE(*IDC,NCP,TCP) - Já em 3FN
+	EMPREGADO_PROJETO(*COP*IDE, IDC, HTE) - Em 1FN
+	=== 3FN ===
+  	EMPREGADO(*IDE, SHE) - Já em 3FN
+	CHEFE(*IDC,NCP,TCP) - Já em 3FN
+	PROJETO(*COP, IDE) - Em 3FN
+	EMPREGADO_PROJETO(*COP*IDE, HTE) Em 3FN
+	

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="Relatorio.xsl"?>
+<relatório xmlns="http://www.dei.isep.ipp.pt/lprog"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://www.dei.isep.ipp.pt/lprog ../xsd/SchemaRelatorio/Relatorio.xsd"
+           id="LPROG-2DK">
+    <páginaRosto>
+        <tema>INSURANCE AGILITY:Sistema de Gestão de Seguros</tema>
+        <disciplina>
+            <designação>Linguagens e Programação</designação>
+            <anoCurricular>2</anoCurricular>
+            <sigla>LPROG</sigla>
+        </disciplina>
+        <autor>
+            <nome>José Mota</nome>
+            <número>1161263</número>
+            <mail>1161263@isep.ipp.pt</mail>
+        </autor>
+        <autor>
+            <nome>Pedro Real</nome>
+            <número>1170689</número>
+            <mail>1170689@isep.ipp.pt</mail>
+        </autor>
+        <autor>
+            <nome>João Flores</nome>
+            <número>1171409</número>
+            <mail>1171409@isep.ipp.pt</mail>
+        </autor>
+        <turma>2DK</turma>
+        <professor sigla="AMD" tipoAula="T"/>
+        <professor sigla="ACM" tipoAula="TP"/>
+        <professor sigla="PDF" tipoAula="PL"/>
+        <logotipoDEI>http://dei.isep.ipp.pt/~i170409/PPISEP/images/dei.png</logotipoDEI>
+        <data>2019-05-19</data>
+    </páginaRosto>
+    <corpo id="corpo">
+        <introdução tituloSecção="Introdução" id="SEC001">
+            <subsecção id="SUBSEC001"></subsecção>
+            <parágrafo>Neste trabalho de Linguagens de Programação, no âmbito de uma melhor gestão as carteiras dos seguros dos clientes da empresa Insurance Agility, foi nos proposta a criação  de vários ficheiros: um ficheiro xml,xsd e xls</parágrafo>
+            <parágrafo>Para além disso, este trabalho permitirá às seguradoras:</parágrafo>
+            <parágrafo> - Obter os produtos (tipos de seguros) contratados por um cliente;</parágrafo>
+            <parágrafo> - Obter informação detalhada (coberturas, valor do prémio, vigência, ...) de um produto contratado por um dado cliente;</parágrafo>
+            <parágrafo> - Sugerir alteração (agravamento/atenuação) do prémio (custo anual) do seguro em função do número e do tipo de participações (casos) ocorridos no ano anterior; </parágrafo>
+            <parágrafo> - Obter um resumo de todos os produtos contratados (apólices) cujo prazo de vigência termina num dado mês de um dado ano;</parágrafo>
+            <parágrafo>Este trabalho teve uma enorme contribuição para um melhor conhecimento e compreensão dos conhecimentos dos conteúdos lecioandos.</parágrafo>
+        </introdução>
+        <outrasSecções>
+            <análise tituloSecção="Análise" id="SEC002">
+                <subsecção id="SUBSEC002"></subsecção>
+                <parágrafo>Desta forma,é necessária armazenar informação necessária.</parágrafo>
+                <parágrafo>Para tal,sabemos que para se criar um seguro para um objeto segurado, necessitamos dos
+                    dados do cliente,dos dados do objeto a ser segurado,e das coberturas para o objeto seguro.É necessario tambem o valor do premio(custo)vigência</parágrafo>
+            </análise>
+            <linguagem tituloSecção="Linguagem" id="SEC003">
+                <subsecção id="SUBSEC003"></subsecção>
+                <parágrafo>Quanto à Linguagem, optamos por fazer um XML com um node root casos, sendo
+                    que cada caso é caracterizado por um atributo,clientes,onde cada cliente é constituido por um cartao de cidadao(cc),nome(constituido pelo
+                    primeiro nome(primeiro)e apelido), contactos, morada(constituida pela rua,porta,localidade,pais,codigo postal) e objetos.
+                    Os objectos são constituidos por um nome, morada(constituida pela rua,porta,localidade,pais,codigo postal),coberturas,valor do premio,vigencia e ocurrencias.
+                    a cobertura é constituida por um nome e uma descricao, o valor premio é um valor inteiro, a vigencia é constituiida por uma data de inicio e uma data de fim e as
+                    ocurrencias são constituidas por total de ocorrencias, total de ocorrencias do penultimo ano e do ano atual.</parágrafo>
+
+                <parágrafo>O nosso XSD restringe: </parágrafo>
+                <parágrafo>CC: </parágrafo>
+                <parágrafo>-> numero tem de ter 8 digitos; </parágrafo>
+                <parágrafo>Nome: </parágrafo>
+                <parágrafo>  -> nome nao pode ser null; </parágrafo>
+                <parágrafo>Telefone </parágrafo>
+                <parágrafo>-> telefone tem de ter 9 digitos; </parágrafo>
+                <parágrafo>Morada: </parágrafo>
+                <parágrafo> ->tem de conter os 5 parametros obrigatorios; </parágrafo>
+                <parágrafo>Objetos: </parágrafo>
+                <parágrafo>-> nome valido e nao vazio </parágrafo>
+                <parágrafo>-> morada valida e nao vazia </parágrafo>
+                <parágrafo>-> coberturas: nome e descrição valido , nome nao pode ser null; </parágrafo>
+                <parágrafo>->Valor premio: tem de ser maior que 0; </parágrafo>
+                <parágrafo>-> vigencia : data inicio e data fim validas e nao vazias </parágrafo>
+                <parágrafo> -> ocurrencias : numero valido ; </parágrafo>
+
+            </linguagem>
+            <transformações tituloSecção="Transformações" id="SEC004">
+                <subsecção id="SUBSEC004"></subsecção>
+                <parágrafo>Para este trabalho foram solicitadas transformações de xml para html,txt e para xml.
+                    Estas trnasformações permitem-nos visualisar por exemplo os dados dos objetos seguros de um dado cliente,
+                    o premio e a vigencia de cada objeto seguro de um dado cliente, numero de participações
+                </parágrafo>
+            </transformações>
+        </outrasSecções>
+        <conclusão tituloSecção="Conclusão" id="SEC005">
+            <subsecção id="SUBSEC005"></subsecção>
+            <parágrafo>Em suma, este projeto ajudou-nos a aprofundar vários conhecimentos em XML, XSD
+                HTML, XSLT e TXT. Face à algumas dificuldades que fomos tendo ao longo deste projeto,bem como imprevistos tardios,
+                o grupo conseguiu superar as adeversidades, ajudando em parte para uma melhor gestão de trabalho em equipa e para ser possivel concluir o trabalho com sucesso.</parágrafo>
+        </conclusão>
+        <referências tituloSecção="Referências" id="SEC006">
+            <refWeb idRef="RefW_1">
+                <URL>http://www.moodle.isep.ipp.pt</URL>
+                <descrição>Ficheiros da disciplina disponíveis no moodle</descrição>
+                <consultadoEm>2019-05-19</consultadoEm>
+            </refWeb>
+            <refWeb idRef="RefW_2">
+                <URL>http://https://www.w3schools.com</URL>
+                <descrição>Consulidação dos conhecimentos necessários á resolução deste projeto</descrição>
+                <consultadoEm>2019-05-19</consultadoEm>
+            </refWeb>
+            <refWeb idRef="RefW_3">
+                <URL>http://https://www.jetbrians.com</URL>
+                <descrição>resolução de alguns issues </descrição>
+                <consultadoEm>2019-05-19</consultadoEm>
+            </refWeb>
+            <refWeb idRef="RefW_4">
+                <URL>http://https://https://stackoverflow.com</URL>
+                <descrição>resolução de alguns issues relacionados com os IDEs </descrição>
+                <consultadoEm>2019-05-19</consultadoEm>
+            </refWeb>
+
+        </referências>
+    </corpo>
+    <anexos id="SEC007" tituloSecção="Anexos">
+        <parágrafo></parágrafo>
+    </anexos>
+</relatório>

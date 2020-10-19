@@ -1,0 +1,43 @@
+1	a) V
+	b) F
+	c) V
+	d) F
+	
+2	a) Não está, dado que C depende de B, indo contra a regra da 3FN 
+	b) R1 (*B,C)
+	   R2 (*A,B(FK))
+
+3	a) 1FN. Não está em 2FN dado que A->D e A->E são relações cujos dependentes não estão ligados a todos os elementos da chave primária
+	b) R1(*A,D,E) 3FN
+	   R2(*A,*B,C) 3FN
+	c) Possui, através da regra de decomposição conclui-se que
+	A,B -> C, D, E => A,B -> C ^ A,B -> D ^ A,B -> E
+
+4	c
+
+5	a) (desenho no pdf) 
+	b) Não há simples. (A,C) é candidata
+	R(*A*C,B,D,E)
+	c) Não, pois há transitividade entre chaves não primários. Apenas está na 1FN
+	d) ====== Início da 2FN ======
+	   R1(*A,B,D) : A -> B,D
+	   R2(*A*C,E,F,G)
+	   ======== Fim da 2FN =======
+	   ====== Início da 3FN ======
+	   R3(*B,D)
+	   R4(*A,B)
+		: F -> E,G
+	   R5(*F,E,G)
+	   R6(*A*C,F)
+	   ======== Fim da 3FN =======
+	
+6	a) (desenho no pdf) 
+	b) A; E; C,D; B,C
+	   Escolhendo A como chave primária:
+	   R(*A,B,C,D,E)
+	c) Está na primeira (atributos atómicos e chave primária definida está automaticamente em 1FN)
+	   Está na segunda (chave simples está automaticamente em 2FN)
+	   Não está na terceira (existe dependência entre chaves não primárias)
+	d) R1(*C*D, E)	3FN
+	   R2(*B, D)	3FN
+	   R3(*A, B, C)	3FN

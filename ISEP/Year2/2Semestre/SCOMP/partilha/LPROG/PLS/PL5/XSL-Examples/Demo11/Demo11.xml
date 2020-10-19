@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An employee file --> 
+<employees>
+  <employee name="Joe Brown">
+	  <phonenumber type="home">22-5551234</phonenumber>
+	  <phonenumber type="fax">22-5552345</phonenumber>
+	  <phonenumber type="mobile">96-5553456</phonenumber>
+  </employee>
+  <employee name="Marina Marini">
+	  <phonenumber type="home">22-5555432</phonenumber>
+	  <phonenumber type="mobile">96-5559876</phonenumber>
+  </employee>
+</employees>

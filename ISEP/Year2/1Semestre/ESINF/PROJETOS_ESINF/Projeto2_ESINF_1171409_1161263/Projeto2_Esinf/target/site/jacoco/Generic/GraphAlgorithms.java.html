@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>GraphAlgorithms.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projeto2_esinf</a> &gt; <a href="index.source.html" class="el_package">Generic</a> &gt; <span class="el_source">GraphAlgorithms.java</span></div><h1>GraphAlgorithms.java</h1><pre class="source lang-java linenums">/*
+* A collection of graph algorithms.
+ */
+package Generic;
+
+import Generic.Edge;
+import Generic.Graph;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+
+/**
+ *
+ * @author DEI-ESINF
+ */
+<span class="nc" id="L16">public class GraphAlgorithms {</span>
+
+    /**
+     * Performs breadth-first search of a Graph starting in a Vertex
+     *
+     * @param g Graph instance
+     * @param vert information of the Vertex that will be the source of the
+     * search
+     * @return qbfs a queue with the vertices of breadth-first search
+     */
+    public static &lt;V, E&gt; LinkedList&lt;V&gt; BreadthFirstSearch(Graph&lt;V, E&gt; g, V vert) {
+
+<span class="fc bfc" id="L28" title="All 2 branches covered.">        if (!g.validVertex(vert)) {</span>
+<span class="fc" id="L29">            return null;</span>
+        }
+
+<span class="fc" id="L32">        LinkedList&lt;V&gt; qbfs = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L33">        LinkedList&lt;V&gt; aux = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L34">        boolean[] visited = new boolean[g.numVertices()];</span>
+
+<span class="fc" id="L36">        qbfs.add(vert);</span>
+<span class="fc" id="L37">        aux.add(vert);</span>
+<span class="fc" id="L38">        int vertKey = g.getKey(vert);</span>
+<span class="fc" id="L39">        visited[vertKey] = true;</span>
+
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        while (!aux.isEmpty()) {</span>
+<span class="fc" id="L42">            vert = aux.remove();</span>
+<span class="fc bfc" id="L43" title="All 2 branches covered.">            for (Edge&lt;V, E&gt; edge : g.outgoingEdges(vert)) {</span>
+<span class="fc" id="L44">                V vAdj = g.opposite(vert, edge);</span>
+<span class="fc" id="L45">                vertKey = g.getKey(vAdj);</span>
+<span class="fc bfc" id="L46" title="All 2 branches covered.">                if (!visited[vertKey]) {</span>
+<span class="fc" id="L47">                    qbfs.add(vAdj);</span>
+<span class="fc" id="L48">                    aux.add(vAdj);</span>
+<span class="fc" id="L49">                    visited[vertKey] = true;</span>
+                }
+<span class="fc" id="L51">            }</span>
+        }
+<span class="fc" id="L53">        return qbfs;</span>
+    }
+
+    /**
+     * Performs depth-first search starting in a Vertex
+     *
+     * @param g Graph instance
+     * @param vOrig Vertex of graph g that will be the source of the search
+     * @param visited set of discovered vertices
+     * @param qdfs queue with vertices of depth-first search
+     */
+    private static &lt;V, E&gt; void DepthFirstSearch(Graph&lt;V, E&gt; g, V vOrig, boolean[] visited, LinkedList&lt;V&gt; qdfs) {
+<span class="fc" id="L65">        qdfs.add(vOrig);</span>
+<span class="fc" id="L66">        visited[g.getKey(vOrig)] = true;</span>
+<span class="fc bfc" id="L67" title="All 2 branches covered.">        for (Edge&lt;V, E&gt; e : g.outgoingEdges(vOrig)) {</span>
+<span class="pc bpc" id="L68" title="1 of 2 branches missed.">            V vert = e.getVDest() != vOrig ? e.getVDest() : e.getVOrig();</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">            if (!visited[g.getKey(vert)]) {</span>
+<span class="fc" id="L70">                DepthFirstSearch(g, vert, visited, qdfs);</span>
+            }
+<span class="fc" id="L72">        }</span>
+
+<span class="fc" id="L74">    }</span>
+
+    /**
+     * @param g Graph instance
+     * @param vert information of the Vertex that will be the source of the
+     * search
+     * @return qdfs a queue with the vertices of depth-first search
+     */
+    public static &lt;V, E&gt; LinkedList&lt;V&gt; DepthFirstSearch(Graph&lt;V, E&gt; g, V vert) {
+
+<span class="fc bfc" id="L84" title="All 2 branches covered.">        if (!g.validVertex(vert)) {</span>
+<span class="fc" id="L85">            return null;</span>
+        }
+
+<span class="fc" id="L88">        LinkedList&lt;V&gt; qdfs = new LinkedList();</span>
+<span class="fc" id="L89">        boolean[] visited = new boolean[g.numVertices()];</span>
+<span class="fc" id="L90">        DepthFirstSearch(g, vert, visited, qdfs);</span>
+<span class="fc" id="L91">        return qdfs;</span>
+    }
+
+    /**
+     * Returns all paths from vOrig to vDest
+     *
+     * @param g Graph instance
+     * @param vOrig Vertex that will be the source of the path
+     * @param vDest Vertex that will be the end of the path
+     * @param visited set of discovered vertices
+     * @param path stack with vertices of the current path (the path is in
+     * reverse order)
+     * @param paths ArrayList with all the paths (in correct order)
+     */
+    private static &lt;V, E&gt; void allPaths(Graph&lt;V, E&gt; g, V vOrig, V vDest,
+            boolean[] visited, LinkedList&lt;V&gt; path, ArrayList&lt;LinkedList&lt;V&gt;&gt; paths) {
+
+<span class="fc" id="L108">        int index = g.getKey(vOrig);</span>
+<span class="fc" id="L109">        visited[index] = true;</span>
+<span class="fc" id="L110">        path.add(vOrig);</span>
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        for (V v : g.adjVertices(vOrig)) {</span>
+
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (v.equals(vDest)) {</span>
+<span class="fc" id="L114">                path.add(vDest);</span>
+<span class="fc" id="L115">                paths.add(revPath(path));</span>
+<span class="fc" id="L116">                path.removeLast();</span>
+
+            } else {
+
+<span class="fc bfc" id="L120" title="All 2 branches covered.">                if (!visited[g.getKey(v)]) {</span>
+<span class="fc" id="L121">                    allPaths(g, v, vDest, visited, path, paths);</span>
+                }
+            }
+<span class="fc" id="L124">        }</span>
+<span class="fc" id="L125">        visited[g.getKey(path.removeLast())] = false;</span>
+
+<span class="fc" id="L127">    }</span>
+
+    /**
+     * @param g Graph instance
+     * @param voInf information of the Vertex origin
+     * @param vdInf information of the Vertex destination
+     * @return paths ArrayList with all paths from voInf to vdInf
+     */
+    public static &lt;V, E&gt; ArrayList&lt;LinkedList&lt;V&gt;&gt; allPaths(Graph&lt;V, E&gt; g, V vOrig, V vDest) {
+
+<span class="pc bpc" id="L137" title="1 of 4 branches missed.">        if (!g.validVertex(vOrig) || !g.validVertex(vDest)) {</span>
+<span class="fc" id="L138">            return null;</span>
+        }
+
+<span class="fc" id="L141">        LinkedList&lt;V&gt; path = new LinkedList&lt;V&gt;();</span>
+<span class="fc" id="L142">        ArrayList&lt;LinkedList&lt;V&gt;&gt; paths = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L143">        boolean[] visited = new boolean[g.numVertices()];</span>
+
+<span class="fc" id="L145">        allPaths(g, vOrig, vDest, visited, path, paths);</span>
+<span class="fc" id="L146">        return paths;</span>
+    }
+
+    /**
+     * Computes shortest-path distance from a source vertex to all reachable
+     * vertices of a graph g with nonnegative edge weights This implementation
+     * uses Dijkstra's algorithm
+     *
+     * @param g Graph instance
+     * @param vOrig Vertex that will be the source of the path
+     * @param visited set of discovered vertices
+     * @param pathkeys minimum path vertices keys
+     * @param dist minimum distances
+     */
+    protected static &lt;V, E&gt; void shortestPathLength(Graph&lt;V, E&gt; g, V vOrig, V[] vertices,
+            boolean[] visited, int[] pathKeys, double[] dist) {
+<span class="fc" id="L162">        int oKey = g.getKey(vOrig);</span>
+<span class="fc" id="L163">        dist[oKey] = 0;</span>
+
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        while (oKey != -1) {</span>
+<span class="fc" id="L166">            visited[g.getKey(vOrig)] = true;</span>
+
+<span class="fc bfc" id="L168" title="All 2 branches covered.">            for (Edge&lt;V, E&gt; e : g.outgoingEdges(vOrig)) {</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">                V vert = e.getVDest() != vOrig ? e.getVDest() : e.getVOrig();</span>
+<span class="fc bfc" id="L170" title="All 4 branches covered.">                if (!visited[g.getKey(vert)] &amp;&amp; dist[g.getKey(vert)] &gt; dist[g.getKey(vOrig)] + e.getWeight()) {</span>
+<span class="fc" id="L171">                    dist[g.getKey(vert)] = dist[g.getKey(vOrig)] + e.getWeight();</span>
+<span class="fc" id="L172">                    pathKeys[g.getKey(vert)] = g.getKey(vOrig);</span>
+                }
+<span class="fc" id="L174">            }</span>
+
+<span class="fc" id="L176">            Double min = Double.MAX_VALUE;</span>
+<span class="fc" id="L177">            oKey = -1;</span>
+<span class="fc bfc" id="L178" title="All 2 branches covered.">            for (int i = 0; i &lt; g.numVertices(); i++) {</span>
+<span class="fc bfc" id="L179" title="All 4 branches covered.">                if (!visited[i] &amp;&amp; dist[i] &lt; min) {</span>
+<span class="fc" id="L180">                    min = dist[i];</span>
+<span class="fc" id="L181">                    oKey = i;</span>
+                }
+            }
+<span class="fc bfc" id="L184" title="All 2 branches covered.">            for (V v : g.vertices()) {</span>
+<span class="fc bfc" id="L185" title="All 2 branches covered.">                if (g.getKey(v) == oKey) {</span>
+<span class="fc" id="L186">                    vOrig = v;</span>
+<span class="fc" id="L187">                    break;</span>
+                }
+<span class="fc" id="L189">            }</span>
+
+<span class="fc" id="L191">        }</span>
+
+<span class="fc" id="L193">    }</span>
+
+    /**
+     * Extracts from pathKeys the minimum path between voInf and vdInf The path
+     * is constructed from the end to the beginning
+     *
+     * @param g Graph instance
+     * @param voInf information of the Vertex origin
+     * @param vdInf information of the Vertex destination
+     * @param pathkeys minimum path vertices keys
+     * @param path stack with the minimum path (correct order)
+     */
+    protected static &lt;V, E&gt; void getPath(Graph&lt;V, E&gt; g, V vOrig, V vDest, V[] verts, int[] pathKeys, LinkedList&lt;V&gt; path) {
+
+<span class="fc" id="L207">     LinkedList&lt;V&gt; aux = new LinkedList&lt;&gt;();//o(1)</span>
+<span class="fc" id="L208">        V v = vDest;//o(1)</span>
+<span class="pc bpc" id="L209" title="1 of 2 branches missed.">        if (g.validVertex(vDest)) {//o(1)</span>
+<span class="fc" id="L210">            aux.add(vDest);//o(1)</span>
+        }
+<span class="fc" id="L212">        int i = g.getKey(vDest);//o(1)</span>
+<span class="fc bfc" id="L213" title="All 2 branches covered.">        while (v != vOrig) {//o(n)</span>
+<span class="fc" id="L214">            int j = pathKeys[i];//o(1)</span>
+<span class="fc bfc" id="L215" title="All 2 branches covered.">            if (j == -1) {//o(1)</span>
+<span class="fc" id="L216">                break;//o(1)</span>
+            }
+<span class="fc" id="L218">            v = verts[j];//o(1)</span>
+<span class="pc bpc" id="L219" title="1 of 2 branches missed.">            if (g.validVertex(v)) {//o(1)</span>
+<span class="fc" id="L220">                aux.add(v);//o(1)</span>
+<span class="fc" id="L221">                i = g.getKey(v);//o(1)</span>
+            }
+<span class="fc" id="L223">        }</span>
+<span class="fc" id="L224">        path.clear();//o(1)</span>
+<span class="fc" id="L225">        path.addAll(revPath(aux));//o(n)</span>
+<span class="fc" id="L226">    }</span>
+
+    //shortest-path between vOrig and vDest
+    public static &lt;V, E&gt; double shortestPath(Graph&lt;V, E&gt; g, V vOrig, V vDest, LinkedList&lt;V&gt; shortPath) {
+<span class="pc bpc" id="L230" title="1 of 4 branches missed.">        if (!g.validVertex(vOrig) || !g.validVertex(vDest)) {</span>
+<span class="fc" id="L231">            return -1;</span>
+        }
+
+<span class="fc" id="L234">        V[] vertices = (V[]) new Object[g.numVertices()];</span>
+<span class="fc" id="L235">        int[] pathKeys = new int[g.numVertices()];</span>
+<span class="fc" id="L236">        double[] dist = new double[g.numVertices()];</span>
+<span class="fc" id="L237">        boolean[] visited = new boolean[g.numVertices()];</span>
+
+<span class="fc bfc" id="L239" title="All 2 branches covered.">        for (int i = 0; i &lt; g.numVertices(); i++) {</span>
+<span class="fc" id="L240">            pathKeys[i]=-1;</span>
+<span class="fc" id="L241">            visited[i] = false;</span>
+<span class="fc" id="L242">            vertices[i] = null;</span>
+<span class="fc" id="L243">            dist[i] = Double.MAX_VALUE;</span>
+        }
+
+<span class="fc bfc" id="L246" title="All 2 branches covered.">        for (V v : g.vertices()) {</span>
+<span class="fc" id="L247">            vertices[g.getKey(v)] = v;</span>
+<span class="fc" id="L248">        }</span>
+
+<span class="fc" id="L250">        shortestPathLength(g, vOrig, vertices, visited, pathKeys, dist);</span>
+<span class="fc" id="L251">        shortPath.clear();</span>
+
+<span class="fc bfc" id="L253" title="All 2 branches covered.">        if (!visited[g.getKey(vDest)]) {</span>
+<span class="fc" id="L254">            return -1;</span>
+        }
+
+<span class="fc" id="L257">        getPath(g, vOrig, vDest, vertices, pathKeys, shortPath);</span>
+
+<span class="fc" id="L259">        return dist[g.getKey(vDest)];</span>
+    }
+
+    //shortest-path between voInf and all other
+    public static &lt;V, E&gt; boolean shortestPaths(Graph&lt;V, E&gt; g, V vOrig, ArrayList&lt;LinkedList&lt;V&gt;&gt; paths, ArrayList&lt;Double&gt; dists) {
+
+<span class="pc bpc" id="L265" title="1 of 2 branches missed.">        if (!g.validVertex(vOrig)) {</span>
+<span class="nc" id="L266">            return false;</span>
+        }
+
+<span class="fc" id="L269">        int nverts = g.numVertices();</span>
+<span class="fc" id="L270">        boolean[] visited = new boolean[nverts]; //default value: false</span>
+<span class="fc" id="L271">        int[] pathKeys = new int[nverts];</span>
+<span class="fc" id="L272">        double[] dist = new double[nverts];</span>
+<span class="fc" id="L273">        V[] vertices = g.allkeyVerts();</span>
+
+<span class="fc bfc" id="L275" title="All 2 branches covered.">        for (int i = 0; i &lt; nverts; i++) {</span>
+<span class="fc" id="L276">            dist[i] = Double.MAX_VALUE;</span>
+<span class="fc" id="L277">            pathKeys[i] = -1;</span>
+        }
+
+<span class="fc" id="L280">        shortestPathLength(g, vOrig, vertices, visited, pathKeys, dist);</span>
+
+<span class="fc" id="L282">        dists.clear();</span>
+<span class="fc" id="L283">        paths.clear();</span>
+<span class="fc bfc" id="L284" title="All 2 branches covered.">        for (int i = 0; i &lt; nverts; i++) {</span>
+<span class="fc" id="L285">            paths.add(null);</span>
+<span class="fc" id="L286">            dists.add(null);</span>
+        }
+<span class="fc bfc" id="L288" title="All 2 branches covered.">        for (int i = 0; i &lt; nverts; i++) {</span>
+<span class="fc" id="L289">            LinkedList&lt;V&gt; shortPath = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L290" title="All 2 branches covered.">            if (dist[i] != Double.MAX_VALUE) {</span>
+<span class="fc" id="L291">                getPath(g, vOrig, vertices[i], vertices, pathKeys, shortPath);</span>
+            }
+<span class="fc" id="L293">            paths.set(i, shortPath);</span>
+<span class="fc" id="L294">            dists.set(i, dist[i]);</span>
+        }
+<span class="fc" id="L296">        return true;</span>
+    }
+
+    /**
+     * Reverses the path
+     *
+     * @param path stack with path
+     */
+    public static &lt;V, E&gt; LinkedList&lt;V&gt; revPath(LinkedList&lt;V&gt; path) {
+
+<span class="fc" id="L306">        LinkedList&lt;V&gt; pathcopy = new LinkedList&lt;&gt;(path);</span>
+<span class="fc" id="L307">        LinkedList&lt;V&gt; pathrev = new LinkedList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L309" title="All 2 branches covered.">        while (!pathcopy.isEmpty()) {</span>
+<span class="fc" id="L310">            pathrev.push(pathcopy.pop());</span>
+        }
+
+<span class="fc" id="L313">        return pathrev;</span>
+    }
+    
+   
+    
+    public static &lt;V, E&gt; double shortestPathEstacoes(Graph&lt;V, E&gt; g, V vOrig, V vDest, LinkedList&lt;V&gt; shortPath) {
+<span class="pc bpc" id="L319" title="1 of 4 branches missed.">        if (!g.validVertex(vOrig) || !g.validVertex(vDest)) {</span>
+<span class="fc" id="L320">            return 0;</span>
+        }
+
+<span class="fc" id="L323">        V[] vertices = (V[]) new Object[g.numVertices()];</span>
+<span class="fc" id="L324">        int[] pathKeys = new int[g.numVertices()];</span>
+<span class="fc" id="L325">        double[] dist = new double[g.numVertices()];</span>
+<span class="fc" id="L326">        boolean[] visited = new boolean[g.numVertices()];</span>
+
+<span class="fc bfc" id="L328" title="All 2 branches covered.">        for (int i = 0; i &lt; g.numVertices(); i++) {</span>
+<span class="fc" id="L329">            pathKeys[i]=-1;</span>
+<span class="fc" id="L330">            visited[i] = false;</span>
+<span class="fc" id="L331">            vertices[i] = null;</span>
+<span class="fc" id="L332">            dist[i] = Double.MAX_VALUE;</span>
+        }
+
+<span class="fc bfc" id="L335" title="All 2 branches covered.">        for (V v : g.vertices()) {</span>
+<span class="fc" id="L336">            vertices[g.getKey(v)] = v;</span>
+<span class="fc" id="L337">        }</span>
+
+<span class="fc" id="L339">        shortestPathLengthEstacoes(g, vOrig, vertices, visited, pathKeys, dist);</span>
+<span class="fc" id="L340">        shortPath.clear();</span>
+
+<span class="fc bfc" id="L342" title="All 2 branches covered.">        if (!visited[g.getKey(vDest)]) {</span>
+<span class="fc" id="L343">            return 0;</span>
+        }
+
+<span class="fc" id="L346">        getPath(g, vOrig, vDest, vertices, pathKeys, shortPath);</span>
+
+<span class="fc" id="L348">        return dist[g.getKey(vDest)];</span>
+    }
+    
+    
+    
+    
+    
+   /**
+     * Computes shortest-path distance from a source vertex to all reachable
+     * vertices of a graph g with nonnegative edge weights This implementation
+     * uses Dijkstra's algorithm
+     *
+     * @param g Graph instance
+     * @param vOrig Vertex that will be the source of the path
+     * @param visited set of discovered vertices
+     * @param pathkeys minimum path vertices keys
+     * @param dist num estacoes
+     */
+    protected static &lt;V, E&gt; void shortestPathLengthEstacoes(Graph&lt;V, E&gt; g, V vOrig, V[] vertices,
+            boolean[] visited, int[] pathKeys, double[] dist) {
+<span class="fc" id="L368">        int oKey = g.getKey(vOrig);</span>
+<span class="fc" id="L369">        dist[oKey] = 1;</span>
+
+<span class="fc bfc" id="L371" title="All 2 branches covered.">        while (oKey != -1) {</span>
+<span class="fc" id="L372">            visited[g.getKey(vOrig)] = true;</span>
+
+<span class="fc bfc" id="L374" title="All 2 branches covered.">            for (Edge&lt;V, E&gt; e : g.outgoingEdges(vOrig)) {</span>
+<span class="pc bpc" id="L375" title="1 of 2 branches missed.">                V vert = e.getVDest() != vOrig ? e.getVDest() : e.getVOrig();</span>
+<span class="fc bfc" id="L376" title="All 4 branches covered.">                if (!visited[g.getKey(vert)] &amp;&amp; dist[g.getKey(vert)] &gt; dist[g.getKey(vOrig)] + 1.0) {</span>
+<span class="fc" id="L377">                    dist[g.getKey(vert)] = dist[g.getKey(vOrig)] + 1.0;</span>
+<span class="fc" id="L378">                    pathKeys[g.getKey(vert)] = g.getKey(vOrig);</span>
+                }
+<span class="fc" id="L380">            }</span>
+
+<span class="fc" id="L382">            Double min = Double.MAX_VALUE;</span>
+<span class="fc" id="L383">            oKey = -1;</span>
+<span class="fc bfc" id="L384" title="All 2 branches covered.">            for (int i = 0; i &lt; g.numVertices(); i++) {</span>
+<span class="fc bfc" id="L385" title="All 4 branches covered.">                if (!visited[i] &amp;&amp; dist[i] &lt; min) {</span>
+<span class="fc" id="L386">                    min = dist[i];</span>
+<span class="fc" id="L387">                    oKey = i;</span>
+                }
+            }
+<span class="fc bfc" id="L390" title="All 2 branches covered.">            for (V v : g.vertices()) {</span>
+<span class="fc bfc" id="L391" title="All 2 branches covered.">                if (g.getKey(v) == oKey) {</span>
+<span class="fc" id="L392">                    vOrig = v;</span>
+<span class="fc" id="L393">                    break;</span>
+                }
+<span class="fc" id="L395">            }</span>
+
+<span class="fc" id="L397">        }</span>
+<span class="fc" id="L398">    }</span>
+
+    }
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

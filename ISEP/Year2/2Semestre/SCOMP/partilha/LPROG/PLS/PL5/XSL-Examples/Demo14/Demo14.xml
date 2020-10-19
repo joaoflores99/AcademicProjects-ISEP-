@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- A file that uses CDATA -->
+<operators>
+  <compare><![CDATA[X < Y]]></compare>
+  <compare>X &gt; Y</compare>
+  <concat><![CDATA[X & Y]]></concat>
+</operators>

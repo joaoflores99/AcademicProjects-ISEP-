@@ -1,0 +1,146 @@
+Terminais que não foram usados
+
+   TOKEN
+
+
+Estado 9conflitos: 1 de deslocamento/redução
+
+
+Gramática
+
+    0 $accept: if_stmt $end
+
+    1 if_stmt: IF expr THEN stmt
+    2        | IF expr THEN stmt ELSE stmt
+
+    3 expr: EXP
+
+    4 stmt: if_stmt
+    5     | STM
+
+
+Terminais, com as regras onde eles aparecem
+
+$end (0) 0
+error (256)
+IF (258) 1 2
+THEN (259) 1 2
+ELSE (260) 2
+TOKEN (261)
+EXP (262) 3
+STM (263) 5
+
+
+Não-terminais com as regras onde eles aparecem
+
+$accept (9)
+    à esquerda: 0
+if_stmt (10)
+    à esquerda: 1 2, à direita: 0 4
+expr (11)
+    à esquerda: 3, à direita: 1 2
+stmt (12)
+    à esquerda: 4 5, à direita: 1 2
+
+
+estado 0
+
+    0 $accept: . if_stmt $end
+
+    IF  deslocar, e ir ao estado 1
+
+    if_stmt  ir ao estado 2
+
+
+estado 1
+
+    1 if_stmt: IF . expr THEN stmt
+    2        | IF . expr THEN stmt ELSE stmt
+
+    EXP  deslocar, e ir ao estado 3
+
+    expr  ir ao estado 4
+
+
+estado 2
+
+    0 $accept: if_stmt . $end
+
+    $end  deslocar, e ir ao estado 5
+
+
+estado 3
+
+    3 expr: EXP .
+
+    $padrão  reduzir usando a regra 3 (expr)
+
+
+estado 4
+
+    1 if_stmt: IF expr . THEN stmt
+    2        | IF expr . THEN stmt ELSE stmt
+
+    THEN  deslocar, e ir ao estado 6
+
+
+estado 5
+
+    0 $accept: if_stmt $end .
+
+    $padrão  aceitar
+
+
+estado 6
+
+    1 if_stmt: IF expr THEN . stmt
+    2        | IF expr THEN . stmt ELSE stmt
+
+    IF   deslocar, e ir ao estado 1
+    STM  deslocar, e ir ao estado 7
+
+    if_stmt  ir ao estado 8
+    stmt     ir ao estado 9
+
+
+estado 7
+
+    5 stmt: STM .
+
+    $padrão  reduzir usando a regra 5 (stmt)
+
+
+estado 8
+
+    4 stmt: if_stmt .
+
+    $padrão  reduzir usando a regra 4 (stmt)
+
+
+estado 9
+
+    1 if_stmt: IF expr THEN stmt .
+    2        | IF expr THEN stmt . ELSE stmt
+
+    ELSE  deslocar, e ir ao estado 10
+
+    ELSE     [reduzir usando a regra 1 (if_stmt)]
+    $padrão  reduzir usando a regra 1 (if_stmt)
+
+
+estado 10
+
+    2 if_stmt: IF expr THEN stmt ELSE . stmt
+
+    IF   deslocar, e ir ao estado 1
+    STM  deslocar, e ir ao estado 7
+
+    if_stmt  ir ao estado 8
+    stmt     ir ao estado 11
+
+
+estado 11
+
+    2 if_stmt: IF expr THEN stmt ELSE stmt .
+
+    $padrão  reduzir usando a regra 2 (if_stmt)

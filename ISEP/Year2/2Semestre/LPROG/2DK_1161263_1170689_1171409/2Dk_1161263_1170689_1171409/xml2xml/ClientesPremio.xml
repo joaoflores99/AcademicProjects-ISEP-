@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?><cliente>
+    <nomeCliente> Pedro  Caxinas 
+    </nomeCliente>
+    <objetos>
+        <objeto>
+            <nomeObjeto> Casa </nomeObjeto>
+            <MoradaObjeto>
+                <rua> Rua 25 Abril </rua>
+                <porta> 326 </porta>
+                <localidade> Caxinas </localidade>
+                <pais>Portugal</pais>
+                <codigoPostal> 4420 </codigoPostal>
+            </MoradaObjeto>
+            <coberturas>
+                <cobertura>
+                    <nomeCobertura>Incendios</nomeCobertura>
+                    <nomeCobertura>Roubos</nomeCobertura>
+                    <nomeCobertura>Inundacoes</nomeCobertura>
+                </cobertura>
+            </coberturas>
+            <valorPremio>500</valorPremio>
+            <vigencia>
+                <dataInicio>2019/05/16</dataInicio>
+                <dataFim>2020/05/16</dataFim>
+            </vigencia>
+            <ocorrencias>
+                <OcurrenciasTotal> 10 </OcurrenciasTotal>
+                <OcorrenciasPenultimo> 2 </OcorrenciasPenultimo>
+                <OcurrenciasUltimo> 1 </OcurrenciasUltimo>
+            </ocorrencias>
+        </objeto>
+    </objetos>
+</cliente>

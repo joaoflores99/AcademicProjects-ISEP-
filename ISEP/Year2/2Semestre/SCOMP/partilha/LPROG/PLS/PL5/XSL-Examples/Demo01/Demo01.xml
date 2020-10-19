@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tools>
+	<tool type="hammer">Round Hammer</tool>
+	<tool type="hammer">Square Hammer</tool>
+	<tool type="screwdriver">Big Philips Screwdriver
+		<color>Red</color>
+	</tool>
+	<tool type="wrench">Monkey wrench</tool>
+</tools>

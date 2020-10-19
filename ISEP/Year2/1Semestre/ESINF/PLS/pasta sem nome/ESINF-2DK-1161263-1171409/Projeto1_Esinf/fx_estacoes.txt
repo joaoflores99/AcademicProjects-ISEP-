@@ -1,0 +1,12 @@
+1,Hospital de S.Joao,C6
+2,IPO,C6
+3,Polo Universitario,C6
+4,Salgueiros,C1
+5,Combatentes,C1
+6,Marques,C1
+7,Faria Guimariaes,C1
+8,Trindade,C1
+9,Aliados,C1
+10,Sao Bento,C1
+11,Jardim do morro,S8
+12,General Torres,S8

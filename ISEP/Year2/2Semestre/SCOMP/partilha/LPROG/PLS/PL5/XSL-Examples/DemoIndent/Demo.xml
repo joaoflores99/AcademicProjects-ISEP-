@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<cars>
+  <car><model>Focus</model><manufacturer>Ford</manufacturer><year>2000</year></car>
+  <car><model>Golf</model><manufacturer>Volkswagen</manufacturer><year>1999</year></car>
+  <car><model>Corolla</model><manufacturer>Toyota</manufacturer><year>1999</year></car>
+  <car><model>Civic</model><manufacturer>Honda</manufacturer><year>2000</year></car>
+  <car><model>Astra</model><manufacturer>Opel</manufacturer><year>2000</year></car>
+</cars>

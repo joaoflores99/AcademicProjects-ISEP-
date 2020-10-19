@@ -1,0 +1,43 @@
+Starting parse
+Entering state 0
+Reading a token: Next token is token INTEGER ()
+Shifting token INTEGER ()
+Entering state 1
+Reducing stack by rule 1 (line 8):
+   $1 = token INTEGER ()
+-> $$ = nterm LIST ()
+Stack now 0
+Entering state 2
+Reading a token: Next token is token ',' ()
+Shifting token ',' ()
+Entering state 4
+Reading a token: Next token is token INTEGER ()
+Shifting token INTEGER ()
+Entering state 5
+Reducing stack by rule 2 (line 9):
+   $1 = nterm LIST ()
+   $2 = token ',' ()
+   $3 = token INTEGER ()
+-> $$ = nterm LIST ()
+Stack now 0
+Entering state 2
+Reading a token: Next token is token ',' ()
+Shifting token ',' ()
+Entering state 4
+Reading a token: Next token is token INTEGER ()
+Shifting token INTEGER ()
+Entering state 5
+Reducing stack by rule 2 (line 9):
+   $1 = nterm LIST ()
+   $2 = token ',' ()
+   $3 = token INTEGER ()
+-> $$ = nterm LIST ()
+Stack now 0
+Entering state 2
+Reading a token: 
+Now at end of input.
+Shifting token $end ()
+Entering state 3
+Stack now 0 2 3
+Cleanup: popping token $end ()
+Cleanup: popping nterm LIST ()

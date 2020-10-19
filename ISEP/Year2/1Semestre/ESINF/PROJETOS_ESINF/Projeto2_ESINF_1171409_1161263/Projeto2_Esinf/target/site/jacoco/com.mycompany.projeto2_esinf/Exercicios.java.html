@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Exercicios.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projeto2_esinf</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.projeto2_esinf</a> &gt; <span class="el_source">Exercicios.java</span></div><h1>Exercicios.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.projeto2_esinf;
+
+import Generic.GraphAlgorithms;
+import Generic.Graph;
+import Generic.Edge;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *
+ * @author joaoflores
+ */
+<span class="nc" id="L22">public class Exercicios {</span>
+
+ /**
+     * checks if the graph es connected
+     *
+     * @param metro graph of stations 
+     * @return null if the grph is connected, otherwise return a list of graphs 
+     */
+   public static List&lt;Graph&lt;Estacao, String&gt;&gt; a2_Conexo(Metro metro) {
+<span class="fc" id="L31">        Graph&lt;Estacao, String&gt; graph = metro.getMetro();</span>
+<span class="fc" id="L32">        boolean[] visited = new boolean[graph.numVertices()];</span>
+
+<span class="fc" id="L34">        List&lt;Graph&lt;Estacao, String&gt;&gt; componentes = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L35">        Estacao[] keysEstacao = metro.getMetro().allkeyVerts();</span>
+<span class="fc" id="L36">        Estacao e = keysEstacao[0];</span>
+<span class="fc" id="L37">        LinkedList&lt;Estacao&gt; bfsresult = GraphAlgorithms.BreadthFirstSearch(graph, e);</span>
+<span class="pc bpc" id="L38" title="3 of 4 branches missed.">        if (bfsresult.size() == graph.numVertices() &amp;&amp; componentes.isEmpty()) {</span>
+<span class="nc" id="L39">            return null;</span>
+        } else {
+<span class="fc" id="L41">            Graph&lt;Estacao, String&gt; auxiliarGraph = new Graph(true);</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">            for (Estacao v : bfsresult) {</span>
+<span class="fc" id="L43">                visited[graph.getKey(v)] = bfsresult.contains(v);</span>
+<span class="fc" id="L44">                auxiliarGraph.insertVertex(v);</span>
+<span class="fc" id="L45">            }</span>
+<span class="fc" id="L46">            LinkedList&lt;Estacao&gt; notVisited = a2_notVisited(visited, graph);</span>
+<span class="fc" id="L47">            Iterator&lt;Estacao&gt; it = notVisited.iterator();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            while (notVisited.size() &gt; 0) {</span>
+<span class="fc" id="L49">                a2_visited(bfsresult, it, auxiliarGraph, visited, graph);</span>
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">                if (!componentes.contains(auxiliarGraph)) {</span>
+<span class="fc" id="L51">                    componentes.add(auxiliarGraph);</span>
+                }
+               
+<span class="fc" id="L54">                notVisited = a2_notVisited(visited, graph);</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">                if (notVisited.size() &gt; 0) {</span>
+<span class="fc" id="L56">                    auxiliarGraph = new Graph(true);</span>
+<span class="fc" id="L57">                    Estacao first = notVisited.getFirst();</span>
+<span class="fc" id="L58">                    auxiliarGraph.insertVertex(first);</span>
+<span class="fc" id="L59">                    visited[graph.getKey(first)] = true;</span>
+<span class="fc" id="L60">                    bfsresult = GraphAlgorithms.BreadthFirstSearch(graph, first);</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">                    for (Estacao v : bfsresult) {</span>
+<span class="fc" id="L62">                        visited[graph.getKey(v)] = true;          </span>
+<span class="fc" id="L63">                    }</span>
+<span class="fc" id="L64">                    it = notVisited.iterator();               </span>
+<span class="fc" id="L65">                }</span>
+            }          
+<span class="fc bfc" id="L67" title="All 2 branches covered.">            if (componentes.size() == 1) {</span>
+<span class="fc" id="L68">                return null;</span>
+            }
+        }
+<span class="fc" id="L71">        return componentes;</span>
+    }
+
+   
+   
+   /**
+     * check the visited stations 
+     *
+     * @param   bfs linkedList of stations 
+     * @param   it linkedList of stations
+     * @param   auxiliarGraph  auxiliar graph to insert stations 
+     * @param   visited  array of ll the visited stations 
+     * @param   graph graph of stations
+     * 
+     */
+    private static void a2_visited(LinkedList&lt;Estacao&gt; bfs, Iterator&lt;Estacao&gt; it, Graph&lt;Estacao, String&gt; auxiliarGraph, boolean visited[], Graph&lt;Estacao, String&gt; graph) {
+<span class="fc bfc" id="L87" title="All 2 branches covered.">        while (it.hasNext()) {</span>
+<span class="fc" id="L88">            Estacao estacao = it.next();</span>
+<span class="fc" id="L89">            Iterable&lt;Estacao&gt; it1 = graph.adjVertices(estacao);</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">            for (Estacao adj : it1) {</span>
+<span class="fc bfc" id="L91" title="All 2 branches covered.">                if (bfs.contains(adj)) {</span>
+<span class="fc" id="L92">                    auxiliarGraph.insertVertex(estacao);                    </span>
+<span class="fc" id="L93">                    visited[graph.getKey(estacao)] = true;</span>
+                }
+<span class="fc" id="L95">            }</span>
+<span class="fc" id="L96">        }</span>
+<span class="fc" id="L97">    }</span>
+
+    /**
+     * check the visited stations 
+     *
+     * @param   visited  array of ll the visited stations 
+     * @param   graph graph of stations
+     * @return  Linkedlist with the statiokns that weren't visited 
+     * 
+     */
+    private static LinkedList&lt;Estacao&gt; a2_notVisited(boolean visited[], Graph&lt;Estacao, String&gt; graph) {
+<span class="fc" id="L108">        LinkedList&lt;Estacao&gt; notVisited = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">        for (Estacao e : graph.vertices()) {</span>
+<span class="fc bfc" id="L110" title="All 2 branches covered.">            if (!visited[graph.getKey(e)]) {</span>
+<span class="fc" id="L111">                notVisited.add(e);</span>
+            }
+<span class="fc" id="L113">        }</span>
+<span class="fc" id="L114">        return notVisited;</span>
+    }
+    
+    
+    /**
+     * smallest number of stations usind the sortetPathEstacoes
+     *
+     * @param metro graph of all stations 
+     * @param eOrig  the station that is the starter point 
+     * @param eDest  the end 
+     * @return  instance of classe percurso 
+     */
+    public static Percurso a4(Metro metro, Estacao eOrig, Estacao eDest) {
+<span class="fc" id="L127">        Estacao vOrig=eOrig;</span>
+<span class="fc" id="L128">        double peso = 0;</span>
+<span class="fc" id="L129">        LinkedList&lt;Estacao&gt; shortstPath = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L130">        double minimoEstacoes = GraphAlgorithms.shortestPathEstacoes(metro.getMetro(), vOrig, eDest, shortstPath);</span>
+<span class="fc" id="L131">        Map&lt;Estacao, String&gt; mapEstacaoLinha = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L132">        Map&lt;Estacao, Double&gt; mapaEstacoesTempoCorrespondente = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L133" title="All 2 branches covered.">        for (Estacao e : shortstPath) {</span>
+<span class="pc bpc" id="L134" title="1 of 2 branches missed.">            if (e != vOrig) {</span>
+<span class="fc" id="L135">            Edge&lt;Estacao, String&gt; edge = metro.getMetro().getEdge(vOrig, e);</span>
+<span class="fc bfc" id="L136" title="All 2 branches covered.">            if(edge!=null){</span>
+<span class="fc" id="L137">            String linha = edge.getElement();</span>
+<span class="fc" id="L138">            peso += edge.getWeight();</span>
+<span class="fc" id="L139">            mapEstacaoLinha.put(e, linha);</span>
+<span class="fc" id="L140">            mapaEstacoesTempoCorrespondente.put(e, peso);</span>
+            }
+        }
+<span class="fc" id="L143">         vOrig=e;</span>
+<span class="fc" id="L144">           }</span>
+ 
+<span class="fc" id="L146">        Percurso p = new Percurso(eOrig, eDest, mapEstacaoLinha, mapaEstacoesTempoCorrespondente, minimoEstacoes);</span>
+<span class="fc" id="L147">        return p;</span>
+    }
+
+    
+    
+    /**
+     *   shortest path in values of time of stations usind the sortetPath
+     *
+     * @param metro graph of all stations 
+     * @param eOrig  the station that is the starter point 
+     * @param eDest  the end 
+     * @return  instance of classe percurso 
+     */
+    public static Percurso a5(Metro metro, Estacao eOrig, Estacao eDest) {
+<span class="fc" id="L161">        Estacao vOrig=eOrig;</span>
+<span class="fc" id="L162">        double instanteInicial=0.0;</span>
+<span class="fc" id="L163">        LinkedList&lt;Estacao&gt; shortstPath = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L164">        double minimoTempoEstacoes = GraphAlgorithms.shortestPath(metro.getMetro(), vOrig, eDest, shortstPath);</span>
+<span class="fc" id="L165">        double peso = 0;</span>
+<span class="fc" id="L166">        Map&lt;Estacao, Double&gt; mapEstacaoPeso = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L167">        Map&lt;Estacao, String&gt; mapEstacaoLinha = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">        for (Estacao e : shortstPath) {</span>
+<span class="pc bpc" id="L169" title="1 of 2 branches missed.">            if (e != vOrig) {</span>
+<span class="fc" id="L170">                Edge&lt;Estacao, String&gt; edge = metro.getMetro().getEdge(vOrig, e);</span>
+<span class="fc bfc" id="L171" title="All 2 branches covered.">                if(edge!=null){</span>
+<span class="fc" id="L172">                String linha = edge.getElement();</span>
+<span class="fc" id="L173">                peso += edge.getWeight();</span>
+<span class="fc" id="L174">                mapEstacaoLinha.put(e, linha);</span>
+<span class="fc" id="L175">                mapEstacaoPeso.put(e, peso);</span>
+                }
+            }
+<span class="fc" id="L178">            vOrig = e;</span>
+<span class="fc" id="L179">        }</span>
+<span class="fc" id="L180">        Percurso p = new Percurso(eOrig, eDest, instanteInicial, mapEstacaoLinha, mapEstacaoPeso, minimoTempoEstacoes);</span>
+<span class="fc" id="L181">        return p;</span>
+    }
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A series of persons --> 
+<persons>
+  <person>
+	<firstname>Joe</firstname>
+	<lastname>Brown</lastname>
+  </person>
+  <person>
+	<firstname>Marina</firstname>
+	<lastname>Marini</lastname>
+  </person>
+</persons>

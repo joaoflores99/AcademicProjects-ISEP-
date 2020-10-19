@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- A simple list of things to wear --> 
+<packinglist>
+  <top title="Over your head">
+    <item id="1" price="8.95">Plain T-shirt</item>
+    <item id="2" price="9.95">Blue T-shirt</item>
+    <item id="3" price="10.95">Polkadot Shirt</item>
+    <item id="4" price="6.95">Denim Shirt</item>
+  </top>
+  <bottom title="For your legs">
+    <item id="5" price="19.95">White Shorts</item>
+    <item id="6" price="17.95">Pink Shorts</item>
+    <item id="7" price="16.95">Blue Bermudas</item>
+    <item id="8" price="18.95">Black Denim Trousers</item>
+    <item id="9" price="16.95">Beige Chinos</item>
+  </bottom>
+  <shoes title="For your feet">
+    <item id="10" price="6.95">Yellow Flip-flops</item>
+    <item id="11" price="15.95">Cowboy Boots</item>
+    <item id="12" price="12.95">Canvas Sneakers</item>
+  </shoes>
+</packinglist>

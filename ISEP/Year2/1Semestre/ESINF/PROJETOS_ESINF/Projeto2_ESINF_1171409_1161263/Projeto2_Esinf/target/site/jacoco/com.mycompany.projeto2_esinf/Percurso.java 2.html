@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Percurso.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projeto2_esinf</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.projeto2_esinf</a> &gt; <span class="el_source">Percurso.java</span></div><h1>Percurso.java</h1><pre class="source lang-java linenums">/*
+  * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.projeto2_esinf;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+/**
+ *
+ * @author joaoflores
+ */
+public class Percurso {
+
+    private double tempoInstanteInicial;
+    private double tempoViagem; //AQUI VAI SER ACOMULADO O TEMPO DA VIAGEM DESDE O MOMNETO DA PARTIDA ATE AO MOMENTO DE CHEGADA
+    private Estacao estacaoOrig;
+    private Estacao estacaoDest;
+
+    
+    // usamos LinkedHashMap uma vez que assim podemos manter a ordem de insersão.
+<span class="pc" id="L23">    private Map&lt;Estacao, String&gt; mapaEstacoesLinha = new LinkedHashMap&lt;&gt;();</span>
+<span class="pc" id="L24">    private Map&lt;Estacao, Double&gt; mapaEstacoesTempoCorrespondente = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="fc" id="L26">    private static Map&lt;Estacao, String&gt; MAP_ES_OMISSAO = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L27">    private static Map&lt;Estacao, Double&gt; MAP_ET_OMISSAO = new LinkedHashMap&lt;&gt;();</span>
+    
+    
+    double numeroEstacoesMinimo;
+    
+
+    private static final double TEMPO_OMISSAO=0;
+
+<span class="nc" id="L35">    public Percurso() {</span>
+<span class="nc" id="L36">    }</span>
+    
+    public Percurso(Estacao estacaoOrig, Estacao estacaoDest, 
+            Map&lt;Estacao, String&gt; mapaEstacoesLinha,Map&lt;Estacao,Double&gt; mapaEstacoesTempoCorrespondente,
+<span class="fc" id="L40">            double  numeroEstacoesMinimo){</span>
+        
+<span class="fc" id="L42">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L43">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L44">        this.numeroEstacoesMinimo=numeroEstacoesMinimo;</span>
+<span class="fc" id="L45">        setMapaEstacoesLinha(mapaEstacoesLinha);</span>
+<span class="fc" id="L46">        setMapaEstacoesTempoCorrespondente(mapaEstacoesTempoCorrespondente);</span>
+<span class="fc" id="L47">    }</span>
+    
+    
+    
+    public Percurso(Estacao estacaoOrig, Estacao estacaoDest, double tempoInstanteInicial, 
+            Map&lt;Estacao, String&gt; mapaEstacoesLinha, 
+<span class="fc" id="L53">            Map&lt;Estacao, Double&gt; mapaEstacoesTempoCorrespondente,double tempoViagem) {</span>
+<span class="fc" id="L54">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L55">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L56">        this.tempoInstanteInicial=tempoInstanteInicial;</span>
+<span class="fc" id="L57">        this.tempoViagem=tempoViagem;</span>
+<span class="fc" id="L58">        setMapaEstacoesLinha(mapaEstacoesLinha);</span>
+<span class="fc" id="L59">        setMapaEstacoesTempoCorrespondente(mapaEstacoesTempoCorrespondente);</span>
+
+<span class="fc" id="L61">    }</span>
+    
+    
+    
+
+<span class="fc" id="L66">    public Percurso(Estacao estacaoOrig, Estacao estacaoDest) {</span>
+<span class="fc" id="L67">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L68">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L69">        mapaEstacoesTempoCorrespondente = MAP_ET_OMISSAO;</span>
+<span class="fc" id="L70">        mapaEstacoesLinha = MAP_ES_OMISSAO;</span>
+<span class="fc" id="L71">        tempoInstanteInicial = TEMPO_OMISSAO;</span>
+<span class="fc" id="L72">    }</span>
+
+<span class="fc" id="L74">    public Percurso(Estacao estacaoOrig, Estacao estacaoDest, double tempoInstanteInicial) {</span>
+<span class="fc" id="L75">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L76">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L77">        this.tempoInstanteInicial=tempoInstanteInicial;</span>
+<span class="fc" id="L78">        mapaEstacoesTempoCorrespondente = MAP_ET_OMISSAO;</span>
+<span class="fc" id="L79">        mapaEstacoesLinha = MAP_ES_OMISSAO;</span>
+
+<span class="fc" id="L81">    }</span>
+
+<span class="fc" id="L83">    public Percurso(double tempoInstanteInicial, Estacao estacaoOrig, Estacao estacaoDest) {</span>
+<span class="fc" id="L84">        this.tempoInstanteInicial = tempoInstanteInicial;</span>
+<span class="fc" id="L85">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L86">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L87">    }</span>
+       
+
+<span class="fc" id="L90">    public Percurso(Estacao estacaoOrig, Estacao estacaoDest, double tempoInstanteInicial, Map&lt;Estacao, String&gt; mapaEstacoesLinha, Map&lt;Estacao, Double&gt; mapaEstacoesTempoCorrespondente) {</span>
+<span class="fc" id="L91">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L92">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L93">        this.tempoInstanteInicial=tempoInstanteInicial;</span>
+<span class="fc" id="L94">        setMapaEstacoesLinha(mapaEstacoesLinha);</span>
+<span class="fc" id="L95">        setMapaEstacoesTempoCorrespondente(mapaEstacoesTempoCorrespondente);</span>
+
+<span class="fc" id="L97">    }</span>
+
+//    public void setTempoInstanteInicial(String tempoInstanteInicial) {
+//        String tmp[] = tempoInstanteInicial.trim().split(&quot;:&quot;);
+//        Tempo tempoInstanteInicialAUX = new Tempo(Integer.parseInt(tmp[0]), Integer.parseInt(tmp[1]), Integer.parseInt(tmp[1]));
+//        this.tempoInstanteInicial = tempoInstanteInicialAUX;
+//
+//    }
+    
+    public static Tempo getTempoString(String tempo) {
+<span class="nc" id="L107">        String tmp[] = tempo.trim().split(&quot;:&quot;);</span>
+<span class="nc" id="L108">        Tempo tempoInstante = new Tempo(Integer.parseInt(tmp[0]), Integer.parseInt(tmp[1]), Integer.parseInt(tmp[2]));</span>
+<span class="nc" id="L109">        return tempoInstante;</span>
+
+    }
+
+    public double getTempoInstanteInicial() {
+<span class="fc" id="L114">        return tempoInstanteInicial;</span>
+    }
+
+    public double getTempoViagem() {
+<span class="fc" id="L118">        return tempoViagem;</span>
+    }
+
+    public void setTempoViagem(double tempoViagem) {
+<span class="fc" id="L122">        this.tempoViagem = tempoViagem;</span>
+<span class="fc" id="L123">    }</span>
+    
+    public static Tempo getAcumucaoTempo(Tempo tempo,String tempoString){
+<span class="nc" id="L126">        Tempo tempo2=getTempoString(tempoString);</span>
+<span class="nc" id="L127">        Tempo soma=Tempo.somaTempos(tempo, tempo2);</span>
+<span class="nc" id="L128">        return soma;</span>
+    }
+
+    public Estacao getEstacaoOrig() {
+<span class="fc" id="L132">        return estacaoOrig;</span>
+    }
+
+    public void setEstacaoOrig(Estacao estacaoOrig) {
+<span class="fc" id="L136">        this.estacaoOrig = estacaoOrig;</span>
+<span class="fc" id="L137">    }</span>
+
+    public Estacao getEstacaoDest() {
+<span class="fc" id="L140">        return estacaoDest;</span>
+    }
+
+    public void setEstacaoDest(Estacao estacaoDest) {
+<span class="fc" id="L144">        this.estacaoDest = estacaoDest;</span>
+<span class="fc" id="L145">    }</span>
+
+    public Map&lt;Estacao, String&gt; getMapaEstacoesLinha() {
+<span class="fc" id="L148">        return mapaEstacoesLinha;</span>
+    }
+
+    public void setMapaEstacoesLinha(Map&lt;Estacao, String&gt; mapaEstacoesLinha) {
+<span class="fc" id="L152">        this.mapaEstacoesLinha = mapaEstacoesLinha;</span>
+<span class="fc" id="L153">    }</span>
+
+    public Map&lt;Estacao, Double&gt; getMapaEstacoesTempoCorrespondente() {
+<span class="fc" id="L156">        return mapaEstacoesTempoCorrespondente;</span>
+    }
+
+    public void setMapaEstacoesTempoCorrespondente(Map&lt;Estacao, Double&gt; mapaEstacoesTempoCorrespondente) {
+<span class="fc" id="L160">        this.mapaEstacoesTempoCorrespondente = mapaEstacoesTempoCorrespondente;</span>
+<span class="fc" id="L161">    }</span>
+    public double getNumeroEstacoesMinimo() {
+<span class="fc" id="L163">        return numeroEstacoesMinimo;</span>
+    }
+
+    public void setNumeroEstacoesMinimo(int numeroEstacoesMinimo) {
+<span class="nc" id="L167">        this.numeroEstacoesMinimo = numeroEstacoesMinimo;</span>
+<span class="nc" id="L168">    }</span>
+    
+    
+
+    @Override
+    public String toString() {
+<span class="nc" id="L174">        return &quot;TempoInstanteInicial=&quot; + tempoInstanteInicial + &quot;, tempoViagem=&quot; + tempoViagem + &quot;, estacaoOrig=&quot; + estacaoOrig + &quot;, estacaoDest=&quot; + estacaoDest + &quot;, mapaEstacoesLinha=&quot; + mapaEstacoesLinha + &quot;, mapaEstacoesTempoCorrespondente=&quot; + mapaEstacoesTempoCorrespondente;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PercursoComEstacoesIntermedias.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projeto2_esinf</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.projeto2_esinf</a> &gt; <span class="el_source">PercursoComEstacoesIntermedias.java</span></div><h1>PercursoComEstacoesIntermedias.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.projeto2_esinf;
+
+import Generic.GraphAlgorithms;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ *
+ * @author morei
+ */
+<span class="fc" id="L18">public class PercursoComEstacoesIntermedias {</span>
+
+    /**
+     * metodod para returnar um percurso que contenha determinadas estacoes
+     *
+     * @param estacaoOrig estacao origem do percurso
+     * @param estacaoDest estacao destino do percurso
+     * @param tempoInstanteInicial do percurso
+     * @param listaEstacoesIntermedias que contem todas as estacoes que o utente
+     * necessitade de passar
+     * @param metro contem o grafo
+     * @return o percurso
+     */
+    public Percurso caminhoMinimoComEstacoesIntermedias(Estacao estacaoOrig, Estacao estacaoDest, double tempoInstanteInicial, List&lt;Estacao&gt; listaEstacoesIntermedias, Metro metro) {
+<span class="fc" id="L32">        Percurso percurso = new Percurso(tempoInstanteInicial, estacaoOrig, estacaoDest);</span>
+<span class="fc" id="L33">        List&lt;LinkedList&lt;Estacao&gt;&gt; allPath = GraphAlgorithms.allPaths(metro.getMetro(), estacaoOrig, estacaoDest);</span>
+<span class="pc bpc" id="L34" title="2 of 4 branches missed.">        if (allPath == null || allPath.isEmpty()) {</span>
+<span class="nc" id="L35">            return null;</span>
+        }
+<span class="fc" id="L37">        LinkedList&lt;Estacao&gt; listaTemporario = getListTemporaria(allPath, metro, listaEstacoesIntermedias);</span>
+
+<span class="fc" id="L39">        Map&lt;Estacao, String&gt; mapaEstacaoLinha = colocarValoresMapLinhas(metro, listaTemporario, estacaoDest);</span>
+<span class="fc" id="L40">        percurso.setMapaEstacoesLinha(mapaEstacaoLinha);</span>
+
+<span class="fc" id="L42">        Map&lt;Estacao, Double&gt; mapaEstacoesTempo = colocarValoresMapTempo(metro, listaTemporario, tempoInstanteInicial, estacaoDest, percurso);</span>
+<span class="fc" id="L43">        percurso.setMapaEstacoesTempoCorrespondente(mapaEstacoesTempo);</span>
+
+<span class="fc" id="L45">        return percurso;</span>
+    }
+
+    /**
+     * colocar num map as estacoes e os valores de tempo, em relacao ao instante
+     * inicial, que em eles se encontravam
+     *
+     * @param metro contem o grafo
+     * @param listaTemporario com estacoes onde ele necessita de passar
+     * @param tempo inicial
+     * @param estacaoDest
+     * @param percurso
+     * @return map com as estacoes e tempos
+     */
+    public Map&lt;Estacao, Double&gt; colocarValoresMapTempo(Metro metro, LinkedList&lt;Estacao&gt; listaTemporario, double tempo, Estacao estacaoDest, Percurso percurso) {
+<span class="fc" id="L60">        Map&lt;Estacao, Double&gt; mapaEstacoesTempo = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L61">        double tempoInicial = tempo;</span>
+<span class="fc" id="L62">        mapaEstacoesTempo.put(listaTemporario.get((listaTemporario.size() - 1)), tempo);</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">        for (int i = listaTemporario.size() - 1; i &gt; 0; i--) {</span>
+<span class="fc" id="L64">            tempo = tempo + (metro.getMetro().getEdge(listaTemporario.get(i - 1), listaTemporario.get(i)).getWeight());</span>
+<span class="fc" id="L65">            mapaEstacoesTempo.put(listaTemporario.get(i - 1), tempo);</span>
+        }
+<span class="fc" id="L67">        percurso.setTempoViagem(tempo - tempoInicial);</span>
+<span class="fc" id="L68">        return mapaEstacoesTempo;</span>
+    }
+
+    /**
+     * colocar num map as estacoes e as linhas em que eles se encontravam
+     *
+     * @param metro contem o grafo
+     * @param listaTemporario lista com as estacoes
+     * @param estacaoDest estacao onde termina a viagem
+     * @return
+     */
+    public Map&lt;Estacao, String&gt; colocarValoresMapLinhas(Metro metro, LinkedList&lt;Estacao&gt; listaTemporario, Estacao estacaoDest) {
+<span class="fc" id="L80">        Map&lt;Estacao, String&gt; mapaEstacaoLinha = new LinkedHashMap&lt;&gt;();</span>
+<span class="fc" id="L81">        Estacao es = null;</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        for (int i = listaTemporario.size() - 1; i &gt; 0; i--) {</span>
+<span class="fc" id="L83">            mapaEstacaoLinha.put(listaTemporario.get(i), metro.getMetro().getEdge(listaTemporario.get(i - 1), listaTemporario.get(i)).getElement());</span>
+<span class="fc" id="L84">            es = listaTemporario.get(i);</span>
+        }
+<span class="fc" id="L86">        mapaEstacaoLinha.put(estacaoDest, metro.getMetro().getEdge(es, estacaoDest).getElement());</span>
+<span class="fc" id="L87">        return mapaEstacaoLinha;</span>
+    }
+
+    /**
+     * metodo para obter uma lista de estacoes que contenha as estacoes
+     * obrigatorias
+     *
+     * @param allPath todos os caminhos de uma estaca a outra
+     * @param metro contem o grafo
+     * @param listaEstacoesIntermedias estacoes obrigatorias
+     * @return a lista pretendida
+     */
+    public LinkedList&lt;Estacao&gt; getListTemporaria(List&lt;LinkedList&lt;Estacao&gt;&gt; allPath, Metro metro, List&lt;Estacao&gt; listaEstacoesIntermedias) {
+<span class="fc" id="L100">        double peso = Double.MAX_VALUE;</span>
+<span class="fc" id="L101">        LinkedList&lt;Estacao&gt; listaTemporario = new LinkedList&lt;&gt;();</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        for (LinkedList&lt;Estacao&gt; lista : allPath) {</span>
+<span class="fc" id="L103">            double tempoMetodo = tempoMenor(lista, metro);</span>
+<span class="fc" id="L104">            System.out.println(&quot;Tempo&quot; + tempoMetodo);</span>
+<span class="pc bpc" id="L105" title="1 of 6 branches missed.">            if (lista.containsAll(listaEstacoesIntermedias) &amp;&amp; tempoMetodo &lt; peso &amp;&amp; tempoMetodo != 0.0) {</span>
+<span class="fc" id="L106">                peso = tempoMetodo;</span>
+<span class="fc" id="L107">                listaTemporario = lista;</span>
+            }
+<span class="fc" id="L109">        }</span>
+<span class="fc" id="L110">        return listaTemporario;</span>
+    }
+
+    /**
+     * metodo que returna o tempo de percurer um caminho
+     *
+     * @param lista representa o caminho
+     * @param metro contem o grafo
+     * @return
+     */
+    public double tempoMenor(LinkedList&lt;Estacao&gt; lista, Metro metro) {
+<span class="fc" id="L121">        double peso = 0.0;</span>
+<span class="fc" id="L122">        int tamanho = lista.size();</span>
+<span class="fc bfc" id="L123" title="All 2 branches covered.">        for (int i = 0; i &lt;= tamanho - 2; i++) {</span>
+<span class="fc" id="L124">            peso = peso + metro.getMetro().getEdge(lista.get(i + 1), lista.get(i)).getWeight();</span>
+        }
+<span class="fc" id="L126">        return peso;</span>
+    }
+
+    /**
+     * metodo para obter o percurso com menor mudança de linhas
+     *
+     * @param estacaoOrig estacoa de origem no percurso
+     * @param estacaoDest
+     * @param tempoInstanteInicial
+     * @param metro
+     * @return
+     */
+    public Percurso caminhoMinimoLinhas(Estacao estacaoOrig, Estacao estacaoDest, double tempoInstanteInicial, Metro metro) {
+<span class="fc" id="L139">        Percurso percurso = new Percurso(tempoInstanteInicial, estacaoOrig, estacaoDest);</span>
+<span class="fc" id="L140">        List&lt;LinkedList&lt;Estacao&gt;&gt; allPath = GraphAlgorithms.allPaths(metro.getMetro(), estacaoOrig, estacaoDest);</span>
+<span class="pc bpc" id="L141" title="2 of 4 branches missed.">        if (allPath == null || allPath.isEmpty()) {</span>
+<span class="nc" id="L142">            return null;</span>
+        }
+<span class="fc" id="L144">        LinkedList&lt;Estacao&gt; listaTemporario = getListTemporariaLinhas(allPath, metro);</span>
+<span class="fc" id="L145">        Map&lt;Estacao, String&gt; mapaEstacaoLinha = colocarValoresMapLinhas(metro, listaTemporario, estacaoDest);</span>
+<span class="fc" id="L146">        percurso.setMapaEstacoesLinha(mapaEstacaoLinha);</span>
+
+<span class="fc" id="L148">        Map&lt;Estacao, Double&gt; mapaEstacoesTempo = colocarValoresMapTempo(metro, listaTemporario, tempoInstanteInicial, estacaoDest, percurso);</span>
+<span class="fc" id="L149">        percurso.setMapaEstacoesTempoCorrespondente(mapaEstacoesTempo);</span>
+<span class="fc" id="L150">        return percurso;</span>
+
+    }
+
+    /**
+     * metodo que retorna a lista que passa por menos estacoes
+     *
+     * @param allPath todos os caminhos
+     * @param metro contem o grafo
+     * @return
+     */
+    public LinkedList&lt;Estacao&gt; getListTemporariaLinhas(List&lt;LinkedList&lt;Estacao&gt;&gt; allPath, Metro metro) {
+<span class="fc" id="L162">        LinkedList&lt;Estacao&gt; temporaria = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L163">        LinkedList&lt;String&gt; tem = new LinkedList&lt;&gt;();</span>
+<span class="fc" id="L164">        int tamanhoTemporaria = Integer.MAX_VALUE;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">        for (LinkedList&lt;Estacao&gt; lista : allPath) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">            for (int i = 0; i &lt; lista.size() - 1; i++) {</span>
+<span class="fc" id="L167">                String linha = metro.getMetro().getEdge(lista.get(i), lista.get(i + 1)).getElement();</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">                if (!tem.contains(linha)) {</span>
+<span class="fc" id="L169">                    tem.add(linha);</span>
+                }
+            }
+<span class="pc bpc" id="L172" title="1 of 4 branches missed.">            if (tem.size() &lt; tamanhoTemporaria &amp;&amp; !tem.isEmpty()) {</span>
+<span class="fc" id="L173">                temporaria = lista;</span>
+            }
+<span class="fc" id="L175">            tamanhoTemporaria = tem.size();</span>
+<span class="fc" id="L176">        }</span>
+<span class="fc" id="L177">        return temporaria;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="pt"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Tempo.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Projeto2_esinf</a> &gt; <a href="index.source.html" class="el_package">com.mycompany.projeto2_esinf</a> &gt; <span class="el_source">Tempo.java</span></div><h1>Tempo.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.mycompany.projeto2_esinf;
+
+/**
+ *
+ * @author joaoflores
+ */
+public class Tempo {
+
+    private int horas;
+    private int minutos;
+    private int segundos;
+
+    private static final int HORAS_POR_OMISSAO = 0;
+    private static final int MINUTOS_POR_OMISSAO = 0;
+    private static final int SEGUNDOS_POR_OMISSAO = 0;
+
+<span class="fc" id="L22">    public Tempo(int horas, int minutos, int segundos) {</span>
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">        if (segundos &gt; 59) {</span>
+<span class="nc" id="L24">            int vezes = segundos / 60;</span>
+<span class="nc" id="L25">            this.minutos = minutos + vezes;</span>
+<span class="nc" id="L26">            this.segundos = segundos - 60 * vezes;</span>
+<span class="nc" id="L27">        } else {</span>
+<span class="fc" id="L28">            this.segundos = segundos;</span>
+<span class="fc" id="L29">            this.minutos = minutos;</span>
+        }
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        if (minutos &gt; 59) {</span>
+<span class="nc" id="L32">            int vezes = this.minutos / 60;</span>
+<span class="nc" id="L33">            this.horas = horas + vezes;</span>
+<span class="nc" id="L34">            this.minutos = this.minutos - 60 * vezes;</span>
+<span class="nc" id="L35">        } else {</span>
+<span class="fc" id="L36">            this.horas = horas;</span>
+        }
+<span class="fc" id="L38">    }</span>
+
+<span class="nc" id="L40">    public Tempo(Tempo tempo){</span>
+<span class="nc" id="L41">        this.horas=tempo.getHoras();</span>
+<span class="nc" id="L42">        this.minutos=tempo.getMinutos();</span>
+<span class="nc" id="L43">        this.segundos=tempo.getSegundos();</span>
+<span class="nc" id="L44">    }</span>
+<span class="fc" id="L45">    public Tempo() {</span>
+<span class="fc" id="L46">        this.horas = HORAS_POR_OMISSAO;</span>
+<span class="fc" id="L47">        this.minutos = MINUTOS_POR_OMISSAO;</span>
+<span class="fc" id="L48">        this.segundos = SEGUNDOS_POR_OMISSAO;</span>
+<span class="fc" id="L49">    }</span>
+
+    public int getHoras() {
+<span class="fc" id="L52">        return horas;</span>
+    }
+
+    public int getMinutos() {
+<span class="fc" id="L56">        return minutos;</span>
+    }
+
+    public int getSegundos() {
+<span class="fc" id="L60">        return segundos;</span>
+    }
+
+    public void setTempo(int horas, int minutos, int segundos) {
+<span class="fc" id="L64">        this.horas = horas;</span>
+<span class="fc" id="L65">        this.minutos = minutos;</span>
+<span class="fc" id="L66">        this.segundos = segundos;</span>
+<span class="fc" id="L67">    }</span>
+
+    public void setTempo(int horas, int minutos, int segundos, String periodo) {
+<span class="nc" id="L70">        this.horas = horas;</span>
+<span class="nc" id="L71">        this.minutos = minutos;</span>
+<span class="nc" id="L72">        this.segundos = segundos;</span>
+<span class="nc" id="L73">    }</span>
+
+    @Override
+    public String toString() {
+<span class="fc" id="L77">        return String.format(&quot;%d:%d:%d&quot;, horas, minutos, segundos);</span>
+    }
+
+    public String converterTempo() {
+        String periodo;
+<span class="fc" id="L82">        int horas = this.horas;</span>
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (this.horas &gt; 12) {</span>
+<span class="fc" id="L84">            horas = this.horas - 12;</span>
+<span class="fc" id="L85">            periodo = &quot;PM&quot;;</span>
+        } else {
+<span class="fc" id="L87">            periodo = &quot;AM&quot;;</span>
+        }
+<span class="fc" id="L89">        return String.format(&quot;%d:%d:%d %s&quot;, horas, minutos, segundos, periodo);</span>
+    }
+
+    public String adicionarSegundo() {
+<span class="fc" id="L93">        segundos++;</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">        if (segundos &gt; 59) {</span>
+<span class="nc" id="L95">            segundos = 0;</span>
+<span class="nc" id="L96">            minutos++;</span>
+<span class="nc bnc" id="L97" title="All 2 branches missed.">            if (minutos &gt; 59) {</span>
+<span class="nc" id="L98">                minutos = 0;</span>
+<span class="nc" id="L99">                horas++;</span>
+            }
+        }
+<span class="fc" id="L102">        return String.format(&quot;Adicionado 1 segundo (%d:%d:%d)&quot;, horas, minutos, segundos);</span>
+    }
+
+    public String isMaiorTempo(Tempo t2) {
+<span class="fc" id="L106">        int totalSegundosT1 = converterParaSegundos();</span>
+<span class="fc" id="L107">        int totalSegundosT2 = t2.converterParaSegundos();</span>
+
+        String resultado;
+<span class="pc bpc" id="L110" title="1 of 2 branches missed.">        if (totalSegundosT1 &gt; totalSegundosT2) {</span>
+<span class="nc" id="L111">            resultado = String.format(&quot;O maior tempo é: %d:%d:%d&quot;, horas, minutos, segundos);</span>
+<span class="pc bpc" id="L112" title="1 of 2 branches missed.">        } else if (totalSegundosT1 &lt; totalSegundosT2) {</span>
+<span class="fc" id="L113">            resultado = String.format(&quot;O maior tempo é: %d:%d:%d&quot;, t2.horas, t2.minutos, t2.segundos);</span>
+        } else {
+<span class="nc" id="L115">            resultado = String.format(&quot;Ambos os tempos são iguais a: %d:%d:%d&quot;, horas, minutos, segundos);</span>
+        }
+
+<span class="fc" id="L118">        return resultado;</span>
+    }
+
+    public String isMaiorParametros(int hora, int minuto, int segundo) {
+<span class="fc" id="L122">        int totalSegundosT1 = converterParaSegundos();</span>
+<span class="fc" id="L123">        int totalSegundosT2 = converterParaSegundosParametros(hora, minuto, segundo);</span>
+
+        String resultado;
+<span class="pc bpc" id="L126" title="1 of 2 branches missed.">        if (totalSegundosT1 &gt; totalSegundosT2) {</span>
+<span class="nc" id="L127">            resultado = String.format(&quot;O maior tempo é: %d:%d:%d&quot;, horas, minutos, segundos);</span>
+<span class="pc bpc" id="L128" title="1 of 2 branches missed.">        } else if (totalSegundosT1 &lt; totalSegundosT2) {</span>
+<span class="fc" id="L129">            resultado = String.format(&quot;O maior tempo é: %d:%d:%d&quot;, hora, minuto, segundo);</span>
+        } else {
+<span class="nc" id="L131">            resultado = String.format(&quot;Ambos os tempos são iguais a: %d:%d:%d&quot;, horas, minutos, segundos);</span>
+        }
+
+<span class="fc" id="L134">        return resultado;</span>
+    }
+
+    public String diferencaTempos(Tempo t2) {
+<span class="fc" id="L138">        int totalSegundosT1 = converterParaSegundos();</span>
+<span class="fc" id="L139">        int totalSegundosT2 = t2.converterParaSegundos();</span>
+
+        String resultado;
+        int diferenca;
+<span class="pc bpc" id="L143" title="1 of 2 branches missed.">        if (totalSegundosT1 &gt; totalSegundosT2) {</span>
+<span class="nc" id="L144">            diferenca = totalSegundosT1 - totalSegundosT2;</span>
+<span class="nc" id="L145">            String tempo = converterParaTempo(diferenca);</span>
+<span class="nc" id="L146">            resultado = String.format(&quot;A diferenca entre os tempos é: %s (%d segundos)&quot;, tempo, diferenca);</span>
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">        } else if (totalSegundosT1 &lt; totalSegundosT2) {</span>
+<span class="fc" id="L148">            diferenca = totalSegundosT2 - totalSegundosT1;</span>
+<span class="fc" id="L149">            String tempo = converterParaTempo(diferenca);</span>
+<span class="fc" id="L150">            resultado = String.format(&quot;A diferenca entre os tempos é: %s (%d segundos)&quot;, tempo, diferenca);</span>
+<span class="fc" id="L151">        } else {</span>
+<span class="nc" id="L152">            resultado = &quot;Ambos os tempos são iguais.&quot;;</span>
+        }
+<span class="fc" id="L154">        return resultado;</span>
+    }
+
+    public String converterParaTempo(int sec) {
+<span class="fc" id="L158">        int horas = sec / 3600;</span>
+<span class="fc" id="L159">        int minutos = (sec % 3600) / 60;</span>
+<span class="fc" id="L160">        int segundos = sec % 60;</span>
+
+<span class="fc" id="L162">        String tempo = String.format(&quot;%d:%d:%d&quot;, horas, minutos, segundos);</span>
+
+<span class="fc" id="L164">        return tempo;</span>
+    }
+
+    public int converterParaSegundos() {
+<span class="fc" id="L168">        int totalSegundos = horas * 3600 + minutos * 60 + segundos;</span>
+<span class="fc" id="L169">        return totalSegundos;</span>
+    }
+
+    public static Tempo convert(String tempoString) {
+<span class="nc" id="L173">        String tmp[] = tempoString.split(&quot;:&quot;);</span>
+<span class="nc" id="L174">        Tempo tempo = new Tempo(Integer.parseInt(tmp[2]), Integer.parseInt(tmp[1]), Integer.parseInt(tmp[0]));</span>
+<span class="nc" id="L175">        return tempo;</span>
+    }
+
+    public int converterParaSegundosParametros(int horas, int minutos, int segundos) {
+<span class="fc" id="L179">        int totalSegundos = horas * 3600 + minutos * 60 + segundos;</span>
+<span class="fc" id="L180">        return totalSegundos;</span>
+    }
+
+    public static Tempo somaTempos(Tempo tempo1, Tempo tempo2) {
+<span class="nc" id="L184">        int segundos = tempo1.getSegundos() + tempo2.getSegundos();</span>
+<span class="nc" id="L185">        int minutos = tempo1.getMinutos() + tempo2.getMinutos();</span>
+<span class="nc" id="L186">        int horas = tempo1.getHoras() + tempo2.getHoras();</span>
+<span class="nc bnc" id="L187" title="All 2 branches missed.">        if (segundos &gt; 59) {</span>
+<span class="nc" id="L188">            int vezes = segundos / 60;</span>
+<span class="nc" id="L189">            minutos = minutos + vezes;</span>
+<span class="nc" id="L190">            segundos = segundos - 60 * vezes;</span>
+<span class="nc" id="L191">        } else {</span>
+<span class="nc" id="L192">            segundos = segundos;</span>
+<span class="nc" id="L193">            minutos = minutos;</span>
+        }
+<span class="nc bnc" id="L195" title="All 2 branches missed.">        if (minutos &gt; 59) {</span>
+<span class="nc" id="L196">            int vezes = minutos / 60;</span>
+<span class="nc" id="L197">            horas = horas + vezes;</span>
+<span class="nc" id="L198">            minutos = minutos - 60 * vezes;</span>
+<span class="nc" id="L199">        } else {</span>
+<span class="nc" id="L200">            horas = horas;</span>
+        }
+<span class="nc" id="L202">        Tempo t=new Tempo(horas,minutos,segundos);</span>
+<span class="nc" id="L203">        return t;</span>
+    }
+    
+    public Tempo addicionarMinutos(int minutos){
+<span class="nc" id="L207">        this.minutos=this.minutos+minutos;</span>
+<span class="nc bnc" id="L208" title="All 2 branches missed.">        if(this.minutos&gt;59){</span>
+<span class="nc" id="L209">            this.horas+=this.minutos/60;</span>
+<span class="nc" id="L210">            this.minutos+=this.minutos%60;</span>
+        }
+<span class="nc" id="L212">        return this;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>

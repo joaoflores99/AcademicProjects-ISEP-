@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- An employee file --> 
+<employees>
+  <employee name="Joe Brown">
+    <car model="Escort" manufacturer="Ford" year="1981" plate="UD-98-88">
+      <parkinglot number="17" />
+    </car>
+  </employee>
+  <employee name="Marina Marini">
+    <car model="Punto" manufacturer="Fiat" year="1997" plate="23-65-AU">
+      <parkinglot number="7" />
+    </car>
+  </employee>
+</employees>

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><cliente><CC><numero>11111111</numero><dataFim>2020-05-16</dataFim>
+</CC><Nome><Primeiro> Pedro </Primeiro><Apelido> Caxinas </Apelido>
+</Nome><Contactos><Telefone> 919191911 </Telefone>
+</Contactos><Morada><Rua> Rua 25 Abril </Rua><Porta> 326 </Porta><Localidade> Caxinas </Localidade><Pais>Portugal</Pais><CodigoPostal> 4420 </CodigoPostal>
+</Morada></cliente>

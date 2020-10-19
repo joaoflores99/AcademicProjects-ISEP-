@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        Nome:  Pedro  Caxinas 
+
+        CC:  
+        numero: 11111111
+        data Fim:2020-05-16
+
+        Contactos: 
+        Telefone:  919191911 
+
+        Morada: 
+        Rua:  Rua 25 Abril 
+        Porta:  326  
+        Localidade:  Caxinas  
+        Pais: Portugal  
+        Codigo Postal:  4420 

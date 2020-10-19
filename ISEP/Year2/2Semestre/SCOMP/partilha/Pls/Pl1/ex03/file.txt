@@ -1,0 +1,14 @@
+int main(void) {
+fork(); fork(); fork();
+printf("SCOMP!\n");
+}
+
+alinea a) 
+temos 6 processos onde o primeiro fork gera 3 forks o segundo gera dois processos  e o terceiro gera 1 fork
+
+alinea b)
+
+foto enviada como anexo dentro do diretorio ex02
+
+alinea c)
+ 7 prints "SCOMP" onde 6 provem dos forks(dos processos filhos) mais 1 do pai 

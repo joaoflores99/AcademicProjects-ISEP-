@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="casos" type="casosType"/>
+  <!-- CasosType type -->
+  <xs:complexType name="casosType">
+    <xs:sequence>
+      <xs:element name="cliente" type="clienteType" maxOccurs ="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- cliente type -->
+  <xs:complexType name="clienteType">
+    <xs:sequence>
+      <xs:element name="cc" type="ccType"/>
+      <xs:element name="nome" type="nomeType"/>
+      <xs:element name="contactos" type="contactosType"/>
+      <xs:element name="morada" type="moradaType" minOccurs ="1"/>
+      <xs:element name="objetos" type="objetosType" minOccurs ="1"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="reference"/>
+  </xs:complexType>
+
+  <xs:complexType name="objetosType">
+    <xs:sequence>
+      <xs:element name="objeto" type="objetoType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- cc type -->
+  <xs:complexType name="objetoType">
+    <xs:sequence>
+      <xs:element name="nomeObjeto" type="stringValida"/>
+      <xs:element name="moradaObjeto" type="moradaType" minOccurs ="1"/>
+      <xs:element type="coberturasType" name="coberturas"/>
+      <xs:element type="numeroMaiorZeroType" name="valorPremio"/>
+      <xs:element type="vigenciaType" name="vigencia"/>
+      <xs:element type="ocurrenciasType" name="ocurrencias"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <!-- cc type -->
+  <xs:complexType name="ccType">
+    <xs:sequence>
+      <xs:element name="numero" type="stringTamanhoOito"/>
+      <xs:element name="dataFim" type="xs:date"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- nome type -->
+  <xs:complexType name="nomeType">
+    <xs:sequence>
+      <xs:element name="primeiro" type="stringValida"/>
+      <xs:element name="apelido" type="stringValida"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- stringTamanho type -->
+  <xs:simpleType name="stringTamanhoOito">
+    <xs:restriction base="xs:string">
+      <xs:pattern value = "[0-9]{8}"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+  <!-- stringValida type -->
+  <xs:simpleType name="stringValida">
+    <xs:restriction base="xs:string">
+      <xs:pattern value = "[A-Za-z0-9 ]+"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- contactoType type -->
+  <xs:complexType name="contactosType">
+    <xs:sequence maxOccurs ="unbounded">
+      <xs:element name="telefone" type="telefoneType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- telefoneType type -->
+  <xs:simpleType name="telefoneType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value= "100000000"/>
+      <xs:maxInclusive value= "999999999"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- moradaType type -->
+  <xs:complexType name="moradaType">
+    <xs:sequence>
+      <xs:element name="rua" type="stringValida"/>
+      <xs:element name="porta" type="stringValida"/>
+      <xs:element name ="localidade" type = "stringValida"/>
+      <xs:element name ="pais" type = "stringValida"/>
+      <xs:element name ="codigo_postal" type = "numeroNaoVazioType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- numeroNaoVazio type -->
+  <xs:simpleType name="numeroNaoVazioType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value= "0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+
+
+
+  <!-- CoberturasType type -->
+  <xs:complexType name="coberturasType">
+    <xs:sequence maxOccurs = "unbounded">
+      <xs:element type ="coberturaType" name = "cobertura"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="coberturaType">
+    <xs:sequence maxOccurs = "unbounded">
+      <xs:element type ="stringValida" name = "descricao"/>
+    </xs:sequence>
+    <xs:attribute name="cobertura" type="xs:string" use="required"/>
+  </xs:complexType>
+
+
+  <!-- vigenciaType type -->
+  <xs:complexType name="vigenciaType">
+    <xs:sequence>
+      <xs:element name="dataInicio" type="dataType"/>
+      <xs:element name="dataFim" type="dataType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- vigenciaType type -->
+  <xs:complexType name="dataType">
+    <xs:sequence>
+      <xs:element name="ano" type="numeroMaiorZeroType"/>
+      <xs:element name="mes" type="numeroMaiorZeroType"/>
+      <xs:element name="dia" type="numeroMaiorZeroType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- ocurrenciasType type -->
+  <xs:complexType name="ocurrenciasType">
+    <xs:sequence>
+      <xs:element name="ocurrenciasTotal" type="numeroValidoType"/>
+      <xs:element name="ocurrenciasPenultimoAno" type="numeroValidoType"/>
+      <xs:element name="ocurrenciasUltimoAno" type="numeroValidoType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <!-- numeroMaiorZeroType type -->
+  <xs:simpleType name="numeroMaiorZeroType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value= "1"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- numeroValidoType type -->
+  <xs:simpleType name="numeroValidoType">
+    <xs:restriction base="xs:integer">
+      <xs:minInclusive value= "0"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- diaDaSemana Type type -->
+  <xs:simpleType name="diaDaSemanaType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Domingos"/>
+      <xs:enumeration value="Segunda-Feiras"/>
+      <xs:enumeration value="Terça-Feiras"/>
+      <xs:enumeration value="Quarta-Feiras"/>
+      <xs:enumeration value="Quinta-Feiras"/>
+      <xs:enumeration value="Sexta-Feiras"/>
+      <xs:enumeration value="Sabados"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>
